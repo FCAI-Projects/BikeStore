@@ -40,3 +40,22 @@ rent per day basic.
 date and time user wants to come for service.
 1. Forget Password: - If user forgets his password he can just click forget password, and he
 From which he can login into the system.
+## MySQL Database Code
+* CREATE TABLE `bike`.`users` ( `username` VARCHAR(255) NOT NULL , `firstName` VARCHAR(255) NOT NULL , `lastName` VARCHAR(255) NOT NULL , `email` VARCHAR(255) NOT NULL , `password` VARCHAR(255) NOT NULL , `gender` TINYINT NOT NULL , `telephone` VARCHAR(11) NOT NULL , `avatarName` VARCHAR(255) NOT NULL , `adminStatus` TINYINT NOT NULL , PRIMARY KEY (`username`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+* CREATE TABLE `bike`.`posts` ( `postId` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(255) NOT NULL , `postContent` TEXT NOT NULL , `photoName` VARCHAR(255) NOT NULL , `postDate` DATETIME NOT NULL , PRIMARY KEY (`postId`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+* ALTER TABLE `posts` ADD FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+* CREATE TABLE `bike`.`comments` ( `commentId` INT NOT NULL AUTO_INCREMENT , `postId` INT NOT NULL , `username` VARCHAR(255) NOT NULL , `commentContent` TEXT NOT NULL , `commentDate` DATETIME NOT NULL , PRIMARY KEY (`commentId`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+* ALTER TABLE `comments` ADD FOREIGN KEY (`postId`) REFERENCES `posts`(`postId`) ON DELETE CASCADE ON UPDATE CASCADE;
+* ALTER TABLE `comments` ADD FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+* CREATE TABLE `bike`.`payment` ( `username` VARCHAR(255) NOT NULL , `visaNumber` VARCHAR(16) NOT NULL , `pin` INT NOT NULL , `money` INT NOT NULL ) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+* ALTER TABLE `payment` ADD FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+* CREATE TABLE `bike`.`bikeservicing` ( `serviceId` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(255) NOT NULL , `serviceDate` DATETIME NOT NULL , PRIMARY KEY (`serviceId`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+* ALTER TABLE `bikeservicing` ADD FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+* CREATE TABLE `bike`.`products` ( `productId` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(255) NOT NULL , `name` VARCHAR(255) NOT NULL , `photoName` VARCHAR(255) NOT NULL , `features` TEXT NOT NULL , `quantity` INT NOT NULL , `rentStatus` TINYINT NOT NULL , `isBike` TINYINT NOT NULL , `isNew` TINYINT NOT NULL , PRIMARY KEY (`productId`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+* ALTER TABLE `products` ADD FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+* CREATE TABLE `bike`.`shoppingcart` ( `username` VARCHAR(255) NOT NULL , `productId` INT NOT NULL ) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+* ALTER TABLE `shoppingcart` ADD FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `shoppingcart` ADD FOREIGN KEY (`productId`) REFERENCES `products`(`productId`) ON DELETE CASCADE ON UPDATE CASCADE;
+* CREATE TABLE `bike`.`rentbike` ( `username` VARCHAR(255) NOT NULL , `productId` INT NOT NULL , `rentDate` DATE NOT NULL ) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+* ALTER TABLE `rentbike` ADD FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `rentbike` ADD FOREIGN KEY (`productId`) REFERENCES `products`(`productId`) ON DELETE CASCADE ON UPDATE CASCADE;
+* CREATE TABLE `bike`.`orders` ( `orderId` INT NOT NULL AUTO_INCREMENT , `productId` INT NOT NULL , `username` VARCHAR(255) NOT NULL , `orderQuantity` INT NOT NULL , `orderDate` DATETIME NOT NULL , PRIMARY KEY (`orderId`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+* ALTER TABLE `orders` ADD FOREIGN KEY (`productId`) REFERENCES `products`(`productId`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `orders` ADD FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE CASCADE ON UPDATE CASCADE;
