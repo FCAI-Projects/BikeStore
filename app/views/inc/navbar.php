@@ -13,7 +13,7 @@
   // Append the requested resource location to the URL 
   $link .= $_SERVER['REQUEST_URI']; 
   
-  if ($link != URLROOT.'/users/register' && $link != URLROOT.'/users/login'):
+  if ($link != URLROOT.'/users/register' && $link != URLROOT.'/users/login' && $link != URLROOT.'/users'):
 ?>
 <!-- Start Navbar -->
 
@@ -44,7 +44,13 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/edit">Setting</a>
+            <?php if(!isAdmin()): ?>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/service">Service</a>
+            <?php endif; ?>
+            <?php if(isAdmin()): ?>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/admin/services">Services Orders</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/admin/users">All Users</a>
+            <?php endif; ?>
             <a class="dropdown-item" href="#">Add Item</a>
             <a class="dropdown-item" href="#">Add Post</a>
             <div class="dropdown-divider"></div>

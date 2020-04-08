@@ -101,6 +101,11 @@
       return $this->db->resultSet();
     }
 
+    public function allServices() {
+      $this->db->query('SELECT * FROM bikeservicing ORDER BY serviceDate DESC');
+      return $this->db->resultSet();
+    }
+
     public function checkServiceDate($date) {
       $this->db->query('SELECT * FROM bikeservicing WHERE serviceDate = :date');
       $this->db->bind(':date', $date);
@@ -109,6 +114,23 @@
         return false;
       } else {
         return true;
+      }
+    }
+
+    public function allUsers() {
+      $this->db->query('SELECT * FROM users ORDER BY createdAt DESC');
+      return $this->db->resultSet();
+    }
+
+
+    public function isAdmin($username) {
+      $this->db->query('SELECT * FROM users WHERE username = :username');
+      $this->db->bind(':username', $username);
+      $row = $this->db->single();
+      if ($row->adminStatus == 1) {
+        return true;
+      } else {
+        return false;
       }
     }
     
