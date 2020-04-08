@@ -1,8 +1,9 @@
 <?php
   class Pages extends Controller {
+    
     public function __construct() {
       # code ...
-    }
+    } 
 
     public function index() {
       $data = ['title' => 'Homepage'];

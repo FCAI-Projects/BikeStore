@@ -10,3 +10,4 @@ class Registry {
         return (isset($this->data[$key]) ? $this->data[$key] : false);
     }
 }
+

@@ -12,3 +12,4 @@
   define("URLROOT", 'http://localhost/BikeStore');
   // Site Name
   define("SITENAME", 'BikeStore');
+

@@ -5,7 +5,8 @@
     private $db;
 
     public function __construct() {
-      $this->db = new Database;
+      global $registry;
+      $this->db = $registry->get('db');
     }
 
     public function register($data) {
