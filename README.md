@@ -59,3 +59,5 @@ From which he can login into the system.
 * ALTER TABLE `rentbike` ADD FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `rentbike` ADD FOREIGN KEY (`productId`) REFERENCES `products`(`productId`) ON DELETE CASCADE ON UPDATE CASCADE;
 * CREATE TABLE `bike`.`orders` ( `orderId` INT NOT NULL AUTO_INCREMENT , `productId` INT NOT NULL , `username` VARCHAR(255) NOT NULL , `orderQuantity` INT NOT NULL , `orderDate` DATETIME NOT NULL , PRIMARY KEY (`orderId`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
 * ALTER TABLE `orders` ADD FOREIGN KEY (`productId`) REFERENCES `products`(`productId`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `orders` ADD FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+* ALTER TABLE `users` CHANGE `adminStatus` `adminStatus` TINYINT(4) NOT NULL DEFAULT '0';
+* ALTER TABLE `bikeservicing` ADD UNIQUE(`serviceDate`)
