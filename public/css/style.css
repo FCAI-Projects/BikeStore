@@ -193,14 +193,14 @@ input:focus, textarea:focus, button:focus {
   border-radius: 5px;
   padding: 20px !important;
 }
-.forms section > div button.login,
-.forms section > div button.signup {
+.forms section > div a.login,
+.forms section > div a.signup {
   color: #2dce89 !important;
   box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1) !important;
   padding: 10px 0 !important;
   border: none;
 }
-.forms section > div button.active {
+.forms section > div a.active {
   background-image: linear-gradient(-45deg, #5e72e4, #2dce89)  !important;
   color: #fff !important;
 }
