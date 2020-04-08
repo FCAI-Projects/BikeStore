@@ -25,10 +25,14 @@
     }
   }
 
-  /*function isLoggedIn() {
-    if (isset($_SESSION['user_id'])) {
+  function isLoggedIn() {
+    if (isset($_SESSION['username'])) {
       return true;
     } else {
       return false;
     }
-  }*/
+  }
+
+  function getUsername() {
+    return $_SESSION['username'];
+  }

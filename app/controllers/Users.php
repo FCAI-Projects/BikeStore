@@ -128,66 +128,107 @@
     }
 
     public function edit() {
-      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $data = [
-          'firstName' => $_POST['userFirstName'],
-          'lastName' => $_POST['userLastName'],
-          'username' => $_SESSION['username'],
-          'email' => $_POST['email'],
-          'password' => $_POST['firstPassword'],
-          'phone' => $_POST['phone'],
-          'gender' => $_POST['gender'],
-          'firstName_err' => '',
-          'lastName_err' => '',
-          'username_err' => '',
-          'email_err' => '',
-          'phone_err' => '',
-        ];
-        if (empty($data['firstName'])) {
-          $data['firstName_err'] = 'Please fill the first name field';
-        }
-        if (empty($data['lastName'])) {
-          $data['lastName_err'] = 'Please fill the last name field';
-        }
-        if (empty($data['email'])) {
-          $data['email_err'] = 'Please fill the email field';
-        }
-        if (empty($data['phone'])) {
-          $data['phone_err'] = 'Please fill the phone number field';
-        }
+      if(isLoggedIn()) {
 
-        if (empty($data['firstName_err']) && empty($data['lastName_err']) && empty($data['email_err']) && empty($data['phone_err'])) {
-          $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-          if ($this->userModel->update($data)) {
-            redirect('users/edit');
-          } else {
-            die('something went wrong');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $data = [
+            'firstName' => $_POST['userFirstName'],
+            'lastName' => $_POST['userLastName'],
+            'username' => getUsername(),
+            'email' => $_POST['email'],
+            'password' => $_POST['firstPassword'],
+            'phone' => $_POST['phone'],
+            'gender' => $_POST['gender'],
+            'firstName_err' => '',
+            'lastName_err' => '',
+            'username_err' => '',
+            'email_err' => '',
+            'phone_err' => '',
+          ];
+          if (empty($data['firstName'])) {
+            $data['firstName_err'] = 'Please fill the first name field';
           }
+          if (empty($data['lastName'])) {
+            $data['lastName_err'] = 'Please fill the last name field';
+          }
+          if (empty($data['email'])) {
+            $data['email_err'] = 'Please fill the email field';
+          }
+          if (empty($data['phone'])) {
+            $data['phone_err'] = 'Please fill the phone number field';
+          }
+  
+          if (empty($data['firstName_err']) && empty($data['lastName_err']) && empty($data['email_err']) && empty($data['phone_err'])) {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            if ($this->userModel->update($data)) {
+              redirect('users/edit');
+            } else {
+              die('something went wrong');
+            }
+          } else {
+            $this->view('users/edit', $data);
+          }
+  
+  
+  
         } else {
+          $row = $this->userModel->usernameExist($_SESSION['username']);
+          $data= [
+            'firstName' => $row->firstName,
+            'lastName' => $row->lastName,
+            'username' => $row->username,
+            'email' => $row->email,
+            'pass' => '',
+            'phone' => $row->telephone,
+            'gender' => $row->gender,
+            'firstName_err' => '',
+            'lastName_err' => '',
+            'username_err' => '',
+            'email_err' => '',
+            'pass_err' => '',
+            'repass_err' => '',
+            'phone_err' => '',
+          ];
           $this->view('users/edit', $data);
         }
 
-
-
       } else {
-        $row = $this->userModel->usernameExist($_SESSION['username']);
-        $data= [
-          'firstName' => $row->firstName,
-          'lastName' => $row->lastName,
-          'username' => $row->username,
-          'email' => $row->email,
-          'pass' => '',
-          'phone' => $row->telephone,
-          'gender' => $row->gender,
-          'firstName_err' => '',
-          'lastName_err' => '',
-          'username_err' => '',
-          'email_err' => '',
-          'pass_err' => '',
-          'repass_err' => '',
-          'phone_err' => '',
-        ];
-        $this->view('users/edit', $data);
+        die("sorry you are not allow to get to this page");
       }
+
+    }
+
+    public function service() {
+      if (isLoggedIn()) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $data = [
+            'serviceDate' => $_POST['serviceDateTime'],
+            'serviceDate_err' => '',
+            'services' => $this->userModel->allServiceForUsername(getUsername())
+          ];
+          $dateTime =  $_POST['serviceDateTime'];
+          $date = substr($dateTime, 0, 10);
+          $time = substr($dateTime, 11, 5);
+          $dateTime = $date . ' ' . $time . ':00';
+          if($this->userModel->checkServiceDate($dateTime)) {
+            $this->userModel->addService($dateTime);
+            flash('service-added', 'Service Added Successfully :)');
+            redirect('users/service');
+          } else {
+            flash('service-added', 'This time isn\'t available try another time :(', 'alert alert-danger');
+            $this->view('users/service', $data);
+          }
+        } else {
+          $data = [
+            'serviceDate' => date("Y-m-d") . 'T' . date("H:i") ,
+            'serviceDate_err' => '',
+            'services' => $this->userModel->allServiceForUsername(getUsername())
+          ];
+          $this->view('users/service', $data);
+        }
+      } else {
+        die("sorry you are not allow to get to this page");
+      }
+
     }
   }

@@ -82,6 +82,34 @@
       }
     }
 
+    public function addService($date) {
+      $this->db->query('INSERT INTO bikeservicing(username, serviceDate) VALUES(:username, :date)');
+      $this->db->bind(':date', $date);
+      $this->db->bind(':username', getUsername());
+      if ($this->db->execute()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+
+    public function allServiceForUsername($username) {
+      $this->db->query('SELECT * FROM bikeservicing WHERE username = :username ORDER BY serviceDate DESC');
+      $this->db->bind(':username', $username);
+      return $this->db->resultSet();
+    }
+
+    public function checkServiceDate($date) {
+      $this->db->query('SELECT * FROM bikeservicing WHERE serviceDate = :date');
+      $this->db->bind(':date', $date);
+      $this->db->execute();
+      if ($this->db->rowCount() > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }
     
 
   }

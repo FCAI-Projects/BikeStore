@@ -23,6 +23,19 @@ input:focus, textarea:focus, button:focus {
 .customBtn:hover {
   box-shadow: 3px 3px 20px #00000036;
 }
+.custom-thead {
+  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+}
+.table .custom-thead th {
+  color: #fff;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.table .custom-thead thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid transparent;
+}
 /*============================================== end grid ==============================================*/
 .navbar {
   background: linear-gradient(-45deg, #5e72e4, #2dce89);

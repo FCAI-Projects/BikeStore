@@ -32,18 +32,19 @@
         <li class="nav-item">
           <a class="nav-link" href="<?php echo URLROOT ?>">Blog</a>
         </li>
-        <?php if (!isset($_SESSION['username'])): ?>
+        <?php if (!isLoggedIn()): ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT ?>/users/register">Register</a>
           </li>
         <?php endif; ?>
-        <?php if (isset($_SESSION['username'])): ?>
+        <?php if (isLoggedIn()): ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <?php echo $_SESSION['username'] ?>
+            <?php echo getUsername() ?>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/edit">Setting</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/users/service">Service</a>
             <a class="dropdown-item" href="#">Add Item</a>
             <a class="dropdown-item" href="#">Add Post</a>
             <div class="dropdown-divider"></div>
