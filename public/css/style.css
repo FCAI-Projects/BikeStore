@@ -9,7 +9,20 @@ p {
 input:focus, textarea:focus, button:focus {
   outline: none;
 }
-
+.customBtn {
+  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  box-shadow: 3px 3px 9px #00000026;
+  color: #ffffff;
+  border-radius: 50px;
+  border: none;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: inline-block;
+  transition: ease-in-out 0.2s;
+}
+.customBtn:hover {
+  box-shadow: 3px 3px 20px #00000036;
+}
 /*============================================== end grid ==============================================*/
 .navbar {
   background: linear-gradient(-45deg, #5e72e4, #2dce89);

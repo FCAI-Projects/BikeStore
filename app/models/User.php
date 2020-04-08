@@ -36,12 +36,12 @@
       }
     }
 
-    public function usernameExist($user) { // if the username exist will return true
+    public function usernameExist($user) { // if the username exist will return true(the row)
       $this->db->query('SELECT * FROM users WHERE username = :user');
       $this->db->bind(':user', $user);
-      $this->db->execute();
+      $row = $this->db->single();
       if ($this->db->rowCount() > 0) {
-        return true;
+        return $row;
       } else {
         return false;
       }
@@ -58,6 +58,29 @@
       }
     }
 
+    public function update($data) {
+      if (empty($data['password'])) {
+        $this->db->query('UPDATE users SET firstName = :fname, lastName = :lname, email = :email, telephone = :phone WHERE username = :username');
+        $this->db->bind(':fname', $data['firstName']);
+        $this->db->bind(':lname', $data['lastName']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':phone', $data['phone']);
+        $this->db->bind(':username', $data['username']);
+      } else {
+        $this->db->query('UPDATE users SET firstName = :fname, lastName = :lname, email = :email, password = :pass, telephone = :phone WHERE username = :username');
+        $this->db->bind(':fname', $data['firstName']);
+        $this->db->bind(':lname', $data['lastName']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':pass', $data['password']);
+        $this->db->bind(':phone', $data['phone']);
+        $this->db->bind(':username', $data['username']);
+      }
+      if ($this->db->execute()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
 
     
 

@@ -27,10 +27,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="<?php echo URLROOT ?>/pages/index">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="<?php echo URLROOT ?>/pages/index">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="blog.html">Blog</a>
+          <a class="nav-link" href="<?php echo URLROOT ?>">Blog</a>
         </li>
         <?php if (!isset($_SESSION['username'])): ?>
           <li class="nav-item">
@@ -43,7 +43,7 @@
             <?php echo $_SESSION['username'] ?>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Setting</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/users/edit">Setting</a>
             <a class="dropdown-item" href="#">Add Item</a>
             <a class="dropdown-item" href="#">Add Post</a>
             <div class="dropdown-divider"></div>

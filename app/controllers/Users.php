@@ -126,4 +126,68 @@
       session_destroy();
       redirect('users/register');
     }
+
+    public function edit() {
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $data = [
+          'firstName' => $_POST['userFirstName'],
+          'lastName' => $_POST['userLastName'],
+          'username' => $_SESSION['username'],
+          'email' => $_POST['email'],
+          'password' => $_POST['firstPassword'],
+          'phone' => $_POST['phone'],
+          'gender' => $_POST['gender'],
+          'firstName_err' => '',
+          'lastName_err' => '',
+          'username_err' => '',
+          'email_err' => '',
+          'phone_err' => '',
+        ];
+        if (empty($data['firstName'])) {
+          $data['firstName_err'] = 'Please fill the first name field';
+        }
+        if (empty($data['lastName'])) {
+          $data['lastName_err'] = 'Please fill the last name field';
+        }
+        if (empty($data['email'])) {
+          $data['email_err'] = 'Please fill the email field';
+        }
+        if (empty($data['phone'])) {
+          $data['phone_err'] = 'Please fill the phone number field';
+        }
+
+        if (empty($data['firstName_err']) && empty($data['lastName_err']) && empty($data['email_err']) && empty($data['phone_err'])) {
+          $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+          if ($this->userModel->update($data)) {
+            redirect('users/edit');
+          } else {
+            die('something went wrong');
+          }
+        } else {
+          $this->view('users/edit', $data);
+        }
+
+
+
+      } else {
+        $row = $this->userModel->usernameExist($_SESSION['username']);
+        $data= [
+          'firstName' => $row->firstName,
+          'lastName' => $row->lastName,
+          'username' => $row->username,
+          'email' => $row->email,
+          'pass' => '',
+          'phone' => $row->telephone,
+          'gender' => $row->gender,
+          'firstName_err' => '',
+          'lastName_err' => '',
+          'username_err' => '',
+          'email_err' => '',
+          'pass_err' => '',
+          'repass_err' => '',
+          'phone_err' => '',
+        ];
+        $this->view('users/edit', $data);
+      }
+    }
   }
