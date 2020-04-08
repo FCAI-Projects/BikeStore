@@ -1,0 +1,249 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+p {
+  color: #666;
+}
+input:focus, textarea:focus, button:focus {
+  outline: none;
+}
+
+/*============================================== end grid ==============================================*/
+.navbar {
+  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+}
+.navbar a.nav-link,
+.navbar .navbar-brand {
+  color: #fff !important;
+}
+.navbar .active a.nav-link {
+  text-decoration: underline;
+}
+/*==================================start blog====================================================*/
+.blog .card-horizontal {
+  box-shadow: 3px 3px 9px #00000026;
+  border-radius: 3px;
+  margin-top: 60px;
+}
+.blog .card-horizontal .img-square-wrapper {
+  margin: 10px 10px 10px 10px;
+}
+.blog .card-horizontal .img-square-wrapper img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+}
+.blog .card-horizontal .card-body {
+  padding-left: 10px !important;
+  padding-top: 10px;
+}
+.blog .card-horizontal .card-body .card-title {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.blog .card-horizontal .card-body a {
+  text-decoration: none;
+  color: #1b1e21;
+}
+.blog .card-horizontal .card-body i {
+  margin-right: 10px;
+  font-size: 16px;
+  width: 8px;
+}
+/*============================================end blog======================================================*/
+
+/*============================================start post==================================================*/
+.post {
+  margin-top: 80px;
+}
+.post_page_column {
+  box-shadow: 3px 3px 9px #00000026;
+  padding: 30px;
+}
+
+.post .user {
+  margin: 10px 0px 30px 0;
+}
+.post .post_img img {
+  width: 100%;
+  height: 100%;
+  padding: 0 30px;
+  margin: 20px 0; /* Will Be Deleted Letter */
+}
+
+/*============================================end post==================================================*/
+
+/*============================================start comment==================================================*/
+.comment {
+  margin: 30px 0 50px 0;
+}
+.comment h2 {
+  margin: 50px 0 10px 0;
+  text-transform: uppercase;
+}
+.comment-container {
+  box-shadow: 3px 3px 9px #00000026;
+  padding: 30px;
+  position: relative;
+}
+.comment .comment-box {
+  position: relative;
+}
+
+.comment .comment-box img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  padding: 3px;
+}
+.comment .comment-box .comment-date {
+  font-size: 18px;
+  position: absolute;
+  top: 4px;
+  right: 20px;
+}
+.comment .comment-body p {
+  width: 95%;
+}
+.comment .comment-body h3 {
+  font-size: 22px;
+}
+.comment .comment-container a.reply-link {
+  color: black;
+  text-decoration: underline;
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+}
+.write-comment {
+  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  box-shadow: 3px 3px 9px #00000026;
+  color: #ffffff;
+  border-radius: 50px;
+  padding: 15px 70px;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: block;
+  transition: ease-in-out 0.2s;
+}
+.write-comment:hover {
+  box-shadow: 3px 3px 20px #00000036;
+}
+/*============================================end comment==================================================*/
+
+/*============================================start write comment==================================================*/
+.writeComment--cancleButton {
+  background: #ffffff;
+  color: #888;
+  height: 50px;
+  width: 200px;
+  border-radius: 30px;
+  border: none;
+  text-transform: capitalize;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.modal .modal-body textarea {
+  resize: none;
+  padding: 10px;
+  border: 1px solid rgb(231, 231, 231);
+}
+.modal .modal-footer {
+  border-top: none !important;
+}
+/*============================================end write comment==================================================*/
+
+
+/*============================================start footer==================================================*/
+.footer {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+/*============================================end footer==================================================*/
+/*============================================start login==================================================*/
+.hidden {
+  display: none;
+}
+
+.visible-form {
+  display: block;
+}
+.forms {
+  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+.forms section {
+  width: 40%;
+  margin: auto;
+  padding: 30px;
+}
+.forms section > div {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px !important;
+}
+.forms section > div button.login,
+.forms section > div button.signup {
+  color: #2dce89 !important;
+  box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1) !important;
+  padding: 10px 0 !important;
+  border: none;
+}
+.forms section > div button.active {
+  background-image: linear-gradient(-45deg, #5e72e4, #2dce89)  !important;
+  color: #fff !important;
+}
+.forms section > div form {
+  padding: 30px 0 0 !important;
+}
+.forms section > div form input[type="submit"] {
+  box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1) !important;
+  background-image: linear-gradient(-45deg, #5e72e4, #2dce89) !important;
+  color: #fff !important;
+}
+.forms section > div form .log-forget-pass {
+  border: none !important;
+}
+.forms section > div form .log-forget-pass {
+  border: 1px solid #ccc;
+}
+.forms section > div .row {
+  margin: 0;
+  padding: 0;
+}
+.forms .forget-pass-form {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.forms .forget-pass-form section.forget-form {
+  overflow: hidden;
+}
+.forms .forget-pass-form section.forget-form h3 {
+  padding-left: 0;
+}
+.forms .forget-pass-form section.forget-form span {
+  cursor: pointer;
+  display: flex;
+  width: 15px;
+}
+.forms .forget-pass-form section.forget-form form {
+  padding-top: 0px !important;
+}
+
+/*# sourceMappingURL=style.css.map */
+/*============================================end login==================================================*/
