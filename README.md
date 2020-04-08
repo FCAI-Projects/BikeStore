@@ -23,20 +23,20 @@ does not have to come manually to shop to purchase the product. He can view the 
 parts in effective Graphical User Interface. User can view features of each product and can
 compare the products in order to purchase a better product.
 ## Project Features
-Visitor Registration: - In this module user must register himself by filling some personal
+1. Visitor Registration: - In this module user must register himself by filling some personal
 details.
-Visitor Login: - After registration user will get user ID and password through which user
+1. Visitor Login: - After registration user will get user ID and password through which user
 can login to access the system.
-Bike Listing and Features: - User can view list of cars and specification of the car.
-Bike Parts listing and Features: - User can view list of bike parts and specification of the
+1. Bike Listing and Features: - User can view list of cars and specification of the car.
+1. Bike Parts listing and Features: - User can view list of bike parts and specification of the
 bike parts.
-Shopping Cart: - User can select the product and add to the shopping cart which he wants
+1. Shopping Cart: - User can select the product and add to the shopping cart which he wants
 to purchase.
-Rent Bike: - Visitor must register himself for renting bike, he will be charged according to
+1. Rent Bike: - Visitor must register himself for renting bike, he will be charged according to
 rent per day basic.
-Bike Blog Section: - Bikers can post article and registered user can comment over it.
-Sell Bike: - User can even sell their bike and get response from other user.
-Bike Servicing: - User can register for bike service, where admin will get to know about
+1. Bike Blog Section: - Bikers can post article and registered user can comment over it.
+1. Sell Bike: - User can even sell their bike and get response from other user.
+1. Bike Servicing: - User can register for bike service, where admin will get to know about
 date and time user wants to come for service.
-Forget Password: - If user forgets his password he can just click forget password, and he
+1. Forget Password: - If user forgets his password he can just click forget password, and he
 From which he can login into the system.
