@@ -47,6 +47,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/edit">Setting</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/users/allOrders">All Orders</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/payment">Add Payment</a>
             <?php if(!isAdmin()): ?>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/service">Service</a>

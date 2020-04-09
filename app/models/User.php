@@ -152,6 +152,12 @@
       $this->db->bind(':username', $username);
       return $this->db->resultSet();
     }
+
+    public function getOrdersForUser($username) {
+      $this->db->query('SELECT orders.orderQuantity, products.*  FROM orders INNER JOIN products ON orders.productId = products.productId  WHERE orders.username = :user');
+      $this->db->bind(':user', $username);
+      return $this->db->resultSet();
+    }
     
 
   }

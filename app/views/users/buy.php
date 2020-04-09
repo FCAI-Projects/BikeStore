@@ -5,7 +5,7 @@
 <?php
 
   $item = $data['item'];
-
+  if ($item->quantity != 0) {
 
   echo '<div class="col-4 mb-4 mx-auto">';
     echo '<div class="card custom-card">';
@@ -43,4 +43,9 @@
     </form>
   </div>
 </div>
+<?php
+} else {
+  die('the product not exist any more');
+}
+?>
 <?php require APPROOT . '/views/inc/footer.php' ?>

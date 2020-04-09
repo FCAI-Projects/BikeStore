@@ -2,7 +2,7 @@
 
   class Users extends Controller {
     public function __construct() {
-      $this->userModel = $this->model('User');
+      $this->userModel = $this->model('user');
     }
 
     public function index() {
@@ -312,6 +312,18 @@
         }
       } else {
         die('sorry you are not allowed to get here');
+      }
+    }
+
+    public function allOrders() {
+      if (isLoggedIn()) {
+        $data = [
+          'products' => $this->userModel->getOrdersForUser(getUsername())
+        ];
+
+        $this->view('users/orders', $data);
+      } else { 
+        die('You are not allowed to get here');
       }
     }
   }
