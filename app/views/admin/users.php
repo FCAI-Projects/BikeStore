@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php' ?>
 
 
-<table class="table mx-auto mt-5 table-hover text-center" style="width: 60%">
+<table class="table mx-auto mt-5 text-center" style="width: 60%">
 <h1 class="text-center mb-5 mt-5" style="color: #333">All Usres</h1>
   <thead class="thead-dark custom-thead">
     <tr>

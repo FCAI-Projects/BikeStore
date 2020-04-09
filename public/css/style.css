@@ -31,10 +31,49 @@ input:focus, textarea:focus, button:focus {
   background-color: transparent;
   border-color: transparent;
 }
-
 .table .custom-thead thead th {
   vertical-align: bottom;
   border-bottom: 2px solid transparent;
+}
+.custom-card {
+  border: none;
+  box-shadow: 5px 5px 20px #0404043b;
+  overflow: hidden;
+  transition: ease-in-out 0.2s;
+  position: relative;
+}
+.custom-card:hover {
+  box-shadow: 5px 5px 5px #0404043b;
+}
+.custom-card .price{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  color: #fff;
+  font-size: 18px;
+  padding: 5px 10px;
+}
+.custom-card .customBtn {
+  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  box-shadow: none;
+  color: #ffffff;
+  border-radius: 5px;
+  border: none;
+  text-transform: none;
+  margin-bottom: 0;
+  display: inline-block;
+  transition: ease-in-out 0.2s;
+}
+.custom-card .customBtn:hover {
+  box-shadow: 2px 2px 10px #0404043b;
+}
+.custom-link {
+  color: #3c3c3c;
+  text-decoration: none;
+}
+.custom-link:hover {
+  color: #3c3c3c;
 }
 /*============================================== end grid ==============================================*/
 .navbar {

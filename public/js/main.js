@@ -1,6 +1,10 @@
 $(function() {
 
   'use strict';
+
+  $('.confirm').click(function () {
+		return confirm('Are you sure??');
+	});
 /*
   // Main site variables.
   var loginBtn    = $('.main-form .login'),

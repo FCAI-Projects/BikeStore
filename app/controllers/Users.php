@@ -249,4 +249,64 @@
       }
 
     }
+
+    public function payment() {
+      if (isLoggedIn()) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $data = [
+            'payments' => $this->userModel->allPayment(getUsername()),
+            'username' => getUsername(),
+            'visaNum' => $_POST['visa'],
+            'pin' =>  $_POST['pin'],
+            'money' =>  $_POST['money'],
+            'visaNum_err' => '',
+            'pin_err' => '',
+            'money_err' => '',
+          ];
+
+          if (empty($data['visaNum'])) {
+            $data['visaNum_err'] = 'The VISA Number field can\'t be empty';
+          } elseif (strlen($data['visaNum']) != 16) {
+            $data['visaNum_err'] = 'The VISA Number must be from 16 number';
+          }
+
+          if (empty($data['pin'])) {
+            $data['pin_err'] = 'The PIN field can\'t be empty';
+          } elseif ($data['pin'] <= 0) {
+            $data['pin_err'] = 'The PIN can\'t be less then or equal 0';
+          }
+
+          if (empty($data['money'])) {
+            $data['money_err'] = 'The PIN field can\'t be empty';
+          } elseif ($data['money'] <= 0) {
+            $data['money_err'] = 'The PIN can\'t be less then or equal 0';
+          }
+
+          if ( empty($data['visaNum_err']) && empty($data['pin_err']) && empty($data['money_err']) ) {
+            if($this->userModel->addPayment($data)){
+              redirect('users/payment');
+            } else {
+              die('something went wrong');
+            }
+          } else {
+            $this->view('users/payment', $data);
+          }
+
+        } else {
+          $data = [
+            'payments' => $this->userModel->allPayment(getUsername()),
+            'username' => getUsername(),
+            'visaNum' => '',
+            'pin' => '',
+            'money' => '',
+            'visaNum_err' => '',
+            'pin_err' => '',
+            'money_err' => '',
+          ];
+          $this->view('users/payment', $data);
+        }
+      } else {
+        die('sorry you are not allowed to get here');
+      }
+    }
   }

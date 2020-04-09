@@ -44,6 +44,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/edit">Setting</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/users/payment">Add Payment</a>
             <?php if(!isAdmin()): ?>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/service">Service</a>
             <?php endif; ?>
@@ -51,7 +52,8 @@
             <a class="dropdown-item" href="<?php echo URLROOT ?>/admin/services">Services Orders</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/admin/users">All Users</a>
             <?php endif; ?>
-            <a class="dropdown-item" href="#">Add Item</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/products/show/<?php echo getUsername()?>">My Products</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/products/add">Add Product</a>
             <a class="dropdown-item" href="#">Add Post</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/logout">Log Out</a>
