@@ -62,3 +62,4 @@ From which he can login into the system.
 * ALTER TABLE `users` CHANGE `adminStatus` `adminStatus` TINYINT(4) NOT NULL DEFAULT '0';
 * ALTER TABLE `bikeservicing` ADD UNIQUE(`serviceDate`)
 * ALTER TABLE `users` ADD `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `adminStatus`;
+* ALTER TABLE `shoppingcart` ADD UNIQUE( `username`, `productId`);
