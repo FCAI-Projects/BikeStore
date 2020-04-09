@@ -38,6 +38,9 @@
           </li>
         <?php endif; ?>
         <?php if (isLoggedIn()): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo URLROOT ?>/shopping/show">Shopping Cart</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php echo getUsername() ?>

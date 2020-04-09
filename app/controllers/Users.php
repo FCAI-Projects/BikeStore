@@ -14,6 +14,7 @@
         redirect('pages');
       } else {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           $data = [
             'firstName' => $_POST['userFirstName'],
             'lastName' => $_POST['userLastName'],
@@ -96,6 +97,7 @@
         redirect('pages');
       } else {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           $data = [
             'username' => $_POST['username'],
             'password' => $_POST['password'],
@@ -149,6 +151,7 @@
       if(isLoggedIn()) {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           $data = [
             'firstName' => $_POST['userFirstName'],
             'lastName' => $_POST['userLastName'],
@@ -219,6 +222,7 @@
     public function service() {
       if (isLoggedIn()) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           $data = [
             'serviceDate' => $_POST['serviceDateTime'],
             'serviceDate_err' => '',
@@ -253,6 +257,7 @@
     public function payment() {
       if (isLoggedIn()) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           $data = [
             'payments' => $this->userModel->allPayment(getUsername()),
             'username' => getUsername(),

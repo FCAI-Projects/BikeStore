@@ -4,6 +4,7 @@
 
     public function __construct() {
       $this->userModel = $this->model('product');
+      $this->shopModel = $this->model('shop');
     }
 
     public function index() {
@@ -14,6 +15,7 @@
       if (isLoggedIn()) {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           $data = [
             'username' => getUsername(),
             'name' => $_POST['name'],
@@ -99,7 +101,7 @@
     public function show($username) {
       $data = [
         'username' => $username,
-        'products' =>$this->userModel->allProductsByUsername($username)
+        'products' => $this->userModel->allProductsByUsername($username)
       ];
       $this->view('products/show', $data);
     }
@@ -109,6 +111,7 @@
         $item = $this->userModel->getProductById($id);
         if ($item->username == getUsername()) {
           if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
               'username' => getUsername(),
               'id' => $id,
@@ -221,4 +224,6 @@
         die('You are not allow to get here');
       }
     }
+
+
   }

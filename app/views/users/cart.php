@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'?>
 <div class="container">
-  <h1 class="text-center mt-4 mb-5" style="color: #333">All [<?php echo $data['username'] ?>] Products</h1>
+  <h1 class="text-center mt-4 mb-5" style="color: #333">All Products In Your Shopping Cart</h1>
   <div class="row mt-5">
     
   <?php
@@ -14,12 +14,13 @@
             echo '<div class="card-body">';
               echo '<h5 class="card-title">'.$item->name.'</h5>';
               echo '<div  class="row">';
-                if (getUsername() == $item->username) {
-                  echo '<a href="'.URLROOT.'/products/edit/'.$item->productId.'" class="btn btn-light mr-1 col">Edit</a>';
-                } else {
-                  echo '<a href="#" class="btn btn-primary customBtn mr-1 col">Add To Cart</a>';
+                if (isLoggedIn()) {
+                  if (getUsername() == $item->username) {
+                    echo '<a href="'.URLROOT.'/products/edit/'.$item->productId.'" class="btn btn-light mr-1 col">Edit</a>';
+                  }else {
+                    echo '<a href="'.URLROOT.'/shopping/buy/'.$item->productId.'" class="btn btn-primary customBtn mr-1 col">Buy</a>';
+                  }
                 }
-                
                 echo '<button type="button" class="btn btn-link custom-link ml-1 col" data-toggle="modal" data-target="#exampleModal'.$item->productId.'">See Features</button>';
               echo '</div>';
             echo '</div>';
@@ -40,9 +41,12 @@
                 echo '<img src="'.URLROOT.'/img/uploads/'. $item->photoName .'" alt="..." style="width: 100%;height: 100%;">';
                 echo '<hr>';
                 echo $item->features;
+                echo '<br><br>';
+                echo '<span style="color: red">Left: ' . $item->quantity . '</span>';
               echo '</div>';
               echo '<div class="modal-footer">';
                 echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                echo '<button type="button" class="btn btn-primary">Save changes</button>';
               echo '</div>';
             echo '</div>';
           echo '</div>';
