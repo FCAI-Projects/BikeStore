@@ -19,12 +19,14 @@
           if ($this->shopModel->add($data)) {
             redirect('pages');
           } else {
-            die('It is already in your shopping cart');
+            flash('error', 'It is already in your shopping cart', 'alert alert-warning');
+            redirect('pages/index');
           }
         }
         
       } else {
-        die('You are not allowed to get here');
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
     }
 
@@ -39,7 +41,8 @@
         $this->view('users/cart', $data);
 
       } else {
-        die('You are not allowed to get here');
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
       
     }
@@ -93,12 +96,14 @@
             $this->view('users/buy', $data);
           }
         } else {
-          die('The Item Is not in your cart');
+          flash('error', 'Sorry, The Item Is not in your cart', 'alert alert-danger');
+          redirect('pages/index');
         }
         
           
       } else {
-        die('You are not allowed to get here');
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
     }
 

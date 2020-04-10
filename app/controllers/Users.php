@@ -66,7 +66,8 @@
               $_SESSION['isAdmin'] = false;
               redirect('pages');
             } else {
-              die('something went wrong');
+              flash('error', 'something went wrong', 'alert alert-danger');
+              redirect('pages/index');
             }
           }
         } else {
@@ -184,7 +185,8 @@
             if ($this->userModel->update($data)) {
               redirect('users/edit');
             } else {
-              die('something went wrong');
+              flash('error', 'something went wrong', 'alert alert-danger');
+              redirect('pages/index');
             }
           } else {
             $this->view('users/edit', $data);
@@ -214,7 +216,8 @@
         }
 
       } else {
-        die("sorry you are not allow to get to this page");
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
 
     }
@@ -249,7 +252,8 @@
           $this->view('users/service', $data);
         }
       } else {
-        die("sorry you are not allow to get to this page");
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
 
     }
@@ -291,7 +295,8 @@
             if($this->userModel->addPayment($data)){
               redirect('users/payment');
             } else {
-              die('something went wrong');
+              flash('error', 'something went wrong', 'alert alert-danger');
+              redirect('pages/index');
             }
           } else {
             $this->view('users/payment', $data);
@@ -311,7 +316,8 @@
           $this->view('users/payment', $data);
         }
       } else {
-        die('sorry you are not allowed to get here');
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
     }
 
@@ -323,7 +329,8 @@
 
         $this->view('users/orders', $data);
       } else { 
-        die('You are not allowed to get here');
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
     }
 
@@ -334,7 +341,8 @@
         ];
         $this->view('users/rent', $data);
       } else {
-        die('You are not allowed to get here');
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
     }
   }

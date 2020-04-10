@@ -73,7 +73,8 @@
             if($this->userModel->addProduct($data)) {
               redirect('pages');
             } else {
-              die('something went wrong');
+              flash('error', 'something went wrong', 'alert alert-danger');
+              redirect('pages/index');
             }
             
           } else {
@@ -95,6 +96,9 @@
           $this->view('products/add', $data);
         }
 
+      } else {
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
     }
 
@@ -170,7 +174,8 @@
               if($this->userModel->editProduct($data)) {
                 redirect('pages');
               } else {
-                die('something went wrong');
+                flash('error', 'something went wrong', 'alert alert-danger');
+                redirect('pages/index');
               }
               
             } else {
@@ -200,10 +205,12 @@
   
   
         } else {
-          die('You are not allow to get here');
+          flash('error', 'You are not allow to get here', 'alert alert-danger');
+          redirect('pages/index');
         }
       } else {
-        die('You are not allow to get here');
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
 
     }
@@ -236,10 +243,13 @@
           $this->userModel->renting($data);
           redirect('pages');
         } else {
-          die('the bike is not for renting');
+          die('');
+          flash('error', 'this product is not for renting', 'alert alert-danger');
+          redirect('pages/index');
         }
       } else {
-        die('You need to sign in');
+        flash('error', 'Sorry, You need to login first', 'alert alert-danger');
+        redirect('pages/index');
       }
     }
 

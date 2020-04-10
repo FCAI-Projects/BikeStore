@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'?>
 <div class="container">
+  <?php flash('error')  ?>
   <h1 class="text-center mt-4 mb-5" style="color: #333">All Products</h1>
   <div class="row mt-5">
     

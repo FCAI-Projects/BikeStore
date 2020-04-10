@@ -110,10 +110,12 @@
           }
 
         } else {
-          die('you are not allowed to get here');
+          flash('error', 'you are not allowed to get here', 'alert alert-danger');
+          redirect('pages/index');
         }
       } else {
-        die('you are not allowed you should sign in');
+        flash('error', 'you are not allowed you should sign in', 'alert alert-danger');
+        redirect('pages/index');
       }
     }
 
