@@ -23,7 +23,8 @@
   </div>
   <div class="custom-file mt-2 mb-3">
     <input type="file" class="custom-file-input" name="photo" id="photo">
-    <label class="custom-file-label" for="photo">Choose file</label>
+    <label class="custom-file-label <?php echo (!empty($data['photo_err']))? 'is-invalid' : '' ?>" for="photo">Choose file</label>
+    <div class="invalid-feedback"><?php echo $data['photo_err'] ?></div>
   </div>
   <div class="custom-control custom-radio mt-3">
     <input type="radio" id="rent" name="renting" class="custom-control-input" value="1" <?php echo ($data['forRent'] == 1)? 'checked' : '' ?>>

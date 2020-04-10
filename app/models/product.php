@@ -74,4 +74,11 @@
       }
     }
 
+    public function renting($data) {
+      $this->db->query('INSERT INTO rentbike(username, productId) VALUES(:username, :id)');
+      $this->db->bind(':username', $data['username']);
+      $this->db->bind(':id', $data['productId']);
+      $this->db->execute();
+    }
+
 }

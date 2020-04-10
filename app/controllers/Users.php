@@ -326,4 +326,15 @@
         die('You are not allowed to get here');
       }
     }
+
+    public function allRents() {
+      if (isLoggedIn()) {
+        $data = [
+          'rents' => $this->userModel->getRents(getUsername())
+        ];
+        $this->view('users/rent', $data);
+      } else {
+        die('You are not allowed to get here');
+      }
+    }
   }

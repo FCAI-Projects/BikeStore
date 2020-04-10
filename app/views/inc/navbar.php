@@ -30,7 +30,7 @@
           <a class="nav-link" href="<?php echo URLROOT ?>/pages/index">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo URLROOT ?>">Blog</a>
+          <a class="nav-link" href="<?php echo URLROOT ?>/posts/blog">Blog</a>
         </li>
         <?php if (!isLoggedIn()): ?>
           <li class="nav-item">
@@ -49,6 +49,7 @@
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/edit">Setting</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/allOrders">All Orders</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/payment">Add Payment</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/users/allRents">Renting</a>
             <?php if(!isAdmin()): ?>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/service">Service</a>
             <?php endif; ?>
@@ -58,7 +59,7 @@
             <?php endif; ?>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/products/show/<?php echo getUsername()?>">My Products</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/products/add">Add Product</a>
-            <a class="dropdown-item" href="#">Add Post</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/posts/add">Add Post</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/logout">Log Out</a>
           </div>
@@ -68,5 +69,6 @@
     </div>
   </div>
 </nav>
+
   <!-- End Navbar -->
 <?php endif; ?>

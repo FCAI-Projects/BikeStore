@@ -47,6 +47,9 @@
                 echo '<span style="color: red">Left: ' . $item->quantity . '</span>';
               echo '</div>';
               echo '<div class="modal-footer">';
+                if ($item->rentStatus == 1) {
+                  echo '<a href="'.URLROOT.'/products/rent/'.$item->productId.'" class="btn btn-success">Rent</a>';
+                }
                 echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
               echo '</div>';
             echo '</div>';

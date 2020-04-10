@@ -225,5 +225,23 @@
       }
     }
 
+    public function rent($id) {
+      if (isLoggedIn()) {
+        $item = $this->userModel->getProductById($id);
+        if ($item->rentStatus == 1) {
+          $data = [
+            'username' => getUsername(),
+            'productId' => $id,
+          ];
+          $this->userModel->renting($data);
+          redirect('pages');
+        } else {
+          die('the bike is not for renting');
+        }
+      } else {
+        die('You need to sign in');
+      }
+    }
+
 
   }

@@ -159,5 +159,10 @@
       return $this->db->resultSet();
     }
     
+    public function getRents($username) {
+      $this->db->query('SELECT rentbike.rentDate, products.* FROM rentbike INNER JOIN products ON rentbike.productId = products.productId WHERE rentbike.username = :username');
+      $this->db->bind(':username', $username);
+      return $this->db->resultSet();
+    }
 
   }
