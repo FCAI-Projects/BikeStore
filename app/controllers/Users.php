@@ -201,6 +201,7 @@
               $data['photo'] = $randomNum . '_' . $photoName;
             }
             if ($this->userModel->update($data)) {
+              flash('sucess-edit', 'Changes Saved Successfully');
               redirect('users/edit');
             } else {
               flash('error', 'something went wrong', 'alert alert-danger');

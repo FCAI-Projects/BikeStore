@@ -1,4 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php' ?>
+<div class="container">
+  <?php flash('sucess-edit'); ?>
+</div>
 <h1 class="text-center mt-4 mb-5" style="color: #333">Edit Profile</h1>
 <form class="mx-auto" method="POST" action="<?php echo URLROOT; ?>/users/edit" style="width: 40%" enctype="multipart/form-data">
   <div class="form-group">
