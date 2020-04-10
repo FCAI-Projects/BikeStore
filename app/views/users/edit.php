@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php' ?>
 <h1 class="text-center mt-4 mb-5" style="color: #333">Edit Profile</h1>
-<form class="mx-auto" method="POST" action="<?php echo URLROOT; ?>/users/edit" style="width: 40%">
+<form class="mx-auto" method="POST" action="<?php echo URLROOT; ?>/users/edit" style="width: 40%" enctype="multipart/form-data">
   <div class="form-group">
     <label for="firstName">First Name</label>
     <input class="form-control form-control-lg <?php echo (!empty($data['firstName_err'])) ? 'is-invalid' : '' ?>" type="text" name="userFirstName" id="firstName" placeholder="First Name" value="<?php echo $data['firstName'] ?>" />
@@ -31,6 +31,11 @@
     <input class="form-control form-control-lg <?php echo (!empty($data['phone_err'])) ? 'is-invalid' : '' ?>" type="text" name="phone" id="phone" placeholder="Type your phone numbre" value="<?php echo $data['phone'] ?>" />
     <div class="invalid-feedback"><?php echo $data['phone_err'] ?></div>
   </div>
+  <div class="custom-file mt-2 mb-3">
+    <input type="file" class="custom-file-input" name="photo" id="photo">
+    <label class="custom-file-label <?php echo (!empty($data['photo_err']))? 'is-invalid' : '' ?>" for="photo">Choose file</label>
+    <div class="invalid-feedback"><?php echo $data['photo_err'] ?></div>
+  </div>
 
   <div class="form-check mt-2 mb-1">
     <input class="form-check-input" type="radio" id="male" name="gender" value="1" <?php if ($data['gender'] == '1') {
@@ -51,3 +56,14 @@
 </form>
 <!-- End Forms Container -->
 <?php require APPROOT . '/views/inc/footer.php' ?>
+<script>
+  $(function (){
+    $('#photo').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    });
+  });
+
+</script>

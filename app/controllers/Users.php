@@ -160,6 +160,7 @@
             'email' => $_POST['email'],
             'password' => $_POST['firstPassword'],
             'phone' => $_POST['phone'],
+            'photo' => '',
             'gender' => $_POST['gender'],
             'firstName_err' => '',
             'lastName_err' => '',
@@ -167,6 +168,15 @@
             'email_err' => '',
             'phone_err' => '',
           ];
+          $photoName = $_FILES['photo']['name'];
+          $photoSize = $_FILES['photo']['name'];
+          $photoTmp = $_FILES['photo']['tmp_name'];
+          $photoType = $_FILES['photo']['type'];
+
+          $photoAllowedExtention = array('jpeg', 'jpg', 'png', 'gif');
+          $photoExtention = explode('.', $photoName);
+          $photoExtention = end($photoExtention);
+          $photoExtention = strtolower($photoExtention);
           if (empty($data['firstName'])) {
             $data['firstName_err'] = 'Please fill the first name field';
           }
@@ -179,9 +189,17 @@
           if (empty($data['phone'])) {
             $data['phone_err'] = 'Please fill the phone number field';
           }
-  
-          if (empty($data['firstName_err']) && empty($data['lastName_err']) && empty($data['email_err']) && empty($data['phone_err'])) {
+          if (!in_array($photoExtention, $photoAllowedExtention) && !empty($photoName)) {
+            $data['photo_err'] = 'Sorry, The Extention Not Allowed :(';
+          }
+
+          if (empty($data['firstName_err']) && empty($data['lastName_err']) && empty($data['email_err']) && empty($data['phone_err']) && empty($data['photo_err'])) {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            if (!empty($photoName)) {
+              $randomNum = rand(0, 100000);
+              move_uploaded_file($photoTmp, 'img/uploads/' . $randomNum . '_' . $photoName);
+              $data['photo'] = $randomNum . '_' . $photoName;
+            }
             if ($this->userModel->update($data)) {
               redirect('users/edit');
             } else {
