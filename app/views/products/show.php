@@ -40,6 +40,8 @@
                 echo '<img src="'.URLROOT.'/img/uploads/'. $item->photoName .'" alt="..." style="width: 100%;height: 100%;">';
                 echo '<hr>';
                 echo $item->features;
+                echo '<br><br>';
+                echo '<span style="color: red">Left: ' . $item->quantity . '</span>';
               echo '</div>';
               echo '<div class="modal-footer">';
                 echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';

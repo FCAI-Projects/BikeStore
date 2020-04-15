@@ -36,7 +36,7 @@
         echo '<tr>';
           echo '<th>' . $payment->visaNumber . '</th>';
           echo '<th>' . $payment->pin . '</th>';
-          echo '<th>' . $payment->money . '</th>';
+          echo '<th>$' . $payment->money . '</th>';
         echo '</tr>';
       }
     ?>

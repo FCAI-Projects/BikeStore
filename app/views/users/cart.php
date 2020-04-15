@@ -1,6 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'?>
 <div class="container">
   <h1 class="text-center mt-4 mb-5" style="color: #333">All Products In Your Shopping Cart</h1>
+  <?php flash('cart');?>
   <div class="row mt-5">
     
   <?php
@@ -46,7 +47,7 @@
               echo '</div>';
               echo '<div class="modal-footer">';
                 echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-                echo '<button type="button" class="btn btn-primary">Save changes</button>';
+                echo '<a href="'. URLROOT .'/users/deletefromcart/'. $item->productId .'" type="button" class="btn btn-danger confirm" style="color:#fff">Delete from cart</a>';
               echo '</div>';
             echo '</div>';
           echo '</div>';

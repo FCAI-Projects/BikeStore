@@ -26,7 +26,7 @@
     
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="<?php echo URLROOT ?>/pages/index">Home</a>
         </li>
         <li class="nav-item">
@@ -60,6 +60,7 @@
             <a class="dropdown-item" href="<?php echo URLROOT ?>/products/show/<?php echo getUsername()?>">My Products</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/products/add">Add Product</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/posts/add">Add Post</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/posts/allposts">All My Posts</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/logout">Log Out</a>
           </div>

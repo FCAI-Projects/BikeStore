@@ -17,6 +17,7 @@
           die('sorry, this is your item');
         } else {
           if ($this->shopModel->add($data)) {
+            flash('error', 'The Product Added Successfully in your cart');
             redirect('pages');
           } else {
             flash('error', 'It is already in your shopping cart', 'alert alert-warning');

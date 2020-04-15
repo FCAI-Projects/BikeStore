@@ -49,7 +49,7 @@
     }
 
     public function allProducts() {
-      $this->db->query('SELECT * FROM products');
+      $this->db->query('SELECT * FROM products ORDER BY productId DESC');
       return $this->db->resultSet();
     }
     public function allProductsByUsername($username) {

@@ -194,7 +194,9 @@
           }
 
           if (empty($data['firstName_err']) && empty($data['lastName_err']) && empty($data['email_err']) && empty($data['phone_err']) && empty($data['photo_err'])) {
-            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            if (!empty($data['password'])) {
+              $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            }
             if (!empty($photoName)) {
               $randomNum = rand(0, 100000);
               move_uploaded_file($photoTmp, 'img/uploads/' . $randomNum . '_' . $photoName);
@@ -364,4 +366,19 @@
         redirect('pages/index');
       }
     }
+
+
+    public function deletefromcart($id) {
+      if (isLoggedIn()) {
+        $data = [
+          'username' => getUsername(),
+          'id' => $id
+        ];
+        if ($this->userModel->removeFromcart($data)) {
+          flash('cart', 'Product Removed From Cart Successfully');
+          redirect('shopping/show');
+        }
+      }
+    }
+
   }

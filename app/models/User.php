@@ -77,26 +77,26 @@
           $this->db->bind(':phone', $data['phone']);
           $this->db->bind(':username', $data['username']);
         }
-    } else {
-      if (empty($data['password'])) {
-        $this->db->query('UPDATE users SET firstName = :fname, lastName = :lname, email = :email, telephone = :phone, avatarName = :avatar WHERE username = :username');
-        $this->db->bind(':fname', $data['firstName']);
-        $this->db->bind(':lname', $data['lastName']);
-        $this->db->bind(':email', $data['email']);
-        $this->db->bind(':phone', $data['phone']);
-        $this->db->bind(':username', $data['username']);
-        $this->db->bind(':avatar', $data['photo']);
       } else {
-        $this->db->query('UPDATE users SET firstName = :fname, lastName = :lname, email = :email, password = :pass, telephone = :phone, avatarName = :avatar WHERE username = :username');
-        $this->db->bind(':fname', $data['firstName']);
-        $this->db->bind(':lname', $data['lastName']);
-        $this->db->bind(':email', $data['email']);
-        $this->db->bind(':pass', $data['password']);
-        $this->db->bind(':phone', $data['phone']);
-        $this->db->bind(':username', $data['username']);
-        $this->db->bind(':avatar', $data['photo']);
+        if (empty($data['password'])) {
+          $this->db->query('UPDATE users SET firstName = :fname, lastName = :lname, email = :email, telephone = :phone, avatarName = :avatar WHERE username = :username');
+          $this->db->bind(':fname', $data['firstName']);
+          $this->db->bind(':lname', $data['lastName']);
+          $this->db->bind(':email', $data['email']);
+          $this->db->bind(':phone', $data['phone']);
+          $this->db->bind(':username', $data['username']);
+          $this->db->bind(':avatar', $data['photo']);
+        } else {
+          $this->db->query('UPDATE users SET firstName = :fname, lastName = :lname, email = :email, password = :pass, telephone = :phone, avatarName = :avatar WHERE username = :username');
+          $this->db->bind(':fname', $data['firstName']);
+          $this->db->bind(':lname', $data['lastName']);
+          $this->db->bind(':email', $data['email']);
+          $this->db->bind(':pass', $data['password']);
+          $this->db->bind(':phone', $data['phone']);
+          $this->db->bind(':username', $data['username']);
+          $this->db->bind(':avatar', $data['photo']);
+        }
       }
-    }
       if ($this->db->execute()) {
         return true;
       } else {
@@ -184,6 +184,17 @@
       $this->db->query('SELECT rentbike.rentDate, products.* FROM rentbike INNER JOIN products ON rentbike.productId = products.productId WHERE rentbike.username = :username');
       $this->db->bind(':username', $username);
       return $this->db->resultSet();
+    }
+
+    public function removeFromcart($data) {
+      $this->db->query('DELETE FROM shoppingcart WHERE username = :username AND productId = :id');
+      $this->db->bind(':username', $data['username']);
+      $this->db->bind(':id', $data['id']);
+      if ($this->db->execute()) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
   }
