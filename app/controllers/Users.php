@@ -385,20 +385,21 @@
     public function fogetPassword() {
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = [
+          'username' => $_POST['username'],
           'email' => $_POST['email'],
           'token' => ''
         ];
         if ($this->userModel->emailExist($data['email'])) {
-          $data['token'] = bin2hex(random_bytes(50));
+          $data['token'] = bin2hex(random_bytes(10));
           if ($this->userModel->insertToken($data))  {
-            $to = $email;
+            $to = $data['email'];
             $subject = "Reset your password on BikeStore";
-            $msg = "Hi there, click on this <a href=".URLROOT."\"/resetpasswrod/" . $token . "\">link</a> to reset your password on our site";
+            $msg = "Hi there, your new password is \n" . $data['token'];
             $msg = wordwrap($msg,70);
             $headers = "From: bikestore@support.com";
             mail($to, $subject, $msg, $headers);
             header('location: pending.php?email=' . $email);
-            flash('forget', 'The email have been sent');
+            flash('forget', 'The new password has been sent to your email :)');
             redirect('users/login');
           } else {
             flash('forget', 'sorry, there is something wrong happend :(', 'alert alert-danger');
@@ -412,5 +413,7 @@
         die('you are not allowed to get here :(');
       }
     }
+
+
 
   }

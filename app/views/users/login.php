@@ -37,6 +37,7 @@
               </div>
               <div class="modal-body">
                 <form class="col-12" method="POST" action="<?php echo URLROOT ?>/users/fogetPassword">
+                  <input class="col-12 form-control form-control-lg mb-2" type="text" name="username" id="username" placeholder="Username" />
                   <input class="col-12 form-control form-control-lg mb-4" type="email" name="email" id="email" placeholder="example@example.com" />
                   <input class="col-12 form-control form-control-lg" id="log-submit" type="submit" value="Submit" />
                 </form>

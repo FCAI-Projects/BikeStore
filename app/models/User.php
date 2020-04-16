@@ -198,9 +198,10 @@
     }
 
     public function insertToken($data) {
-      $this->db->query('INSERT INTO passwordreset(email, token) VALUES(:email, :token)');
+      $this->db->query('UPDATE users SET password = :pass WHERE email = :email AND username = :user');
+      $this->db->bind(':pass',  password_hash($data['token'], PASSWORD_DEFAULT));
       $this->db->bind(':email', $data['email']);
-      $this->db->bind(':token', $data['token']);
+      $this->db->bind(':user', $data['username']);
       if ($this->db->execute()) {
         return true;
       } else {
