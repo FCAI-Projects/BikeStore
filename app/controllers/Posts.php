@@ -72,7 +72,7 @@
 
     public function blog() {
       $data = [
-        'posts' => $this->postModel->allPosts()
+        'posts' => $this ->postModel->allPosts()
       ];
 
       $this->view('pages/blog', $data);

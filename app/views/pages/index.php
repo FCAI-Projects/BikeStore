@@ -11,7 +11,7 @@
         echo '<div class="col-4 mb-4">';
           echo '<div class="card custom-card">';
             echo '<span class="price">$'.$item->price.'</span>';
-            echo '<img src="'.URLROOT.'/img/uploads/'. $item->photoName .'" class="card-img-top" alt="..." style="width: 100%;height: 200px;">';
+            echo '<div style="width: 100%;height: 250px;overflow: hidden"><img src="'.URLROOT.'/img/uploads/'. $item->photoName .'" class="card-img-top" alt="..." style="width: 100%;height: 100%;"></div>';
             echo '<div class="card-body">';
               echo '<h5 class="card-title">'.$item->name.'</h5>';
               echo '<div  class="row">';

@@ -69,7 +69,7 @@
         $this->db->query('UPDATE posts SET postTitle = :title, postContent = :content WHERE postId = :id');
       } else {
         $this->db->query('UPDATE posts SET postTitle = :title, postContent = :content, photoName = :name WHERE postId = :id');
-        $this->db->bind(':photoName', $data['photo']);
+        $this->db->bind(':name', $data['photo']);
       }
       $this->db->bind(':title', $data['title']);
       $this->db->bind(':content', nl2br($data['content']));
