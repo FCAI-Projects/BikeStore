@@ -381,4 +381,36 @@
       }
     }
 
+
+    public function fogetPassword() {
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $data = [
+          'email' => $_POST['email'],
+          'token' => ''
+        ];
+        if ($this->userModel->emailExist($data['email'])) {
+          $data['token'] = bin2hex(random_bytes(50));
+          if ($this->userModel->insertToken($data))  {
+            $to = $email;
+            $subject = "Reset your password on BikeStore";
+            $msg = "Hi there, click on this <a href=".URLROOT."\"/resetpasswrod/" . $token . "\">link</a> to reset your password on our site";
+            $msg = wordwrap($msg,70);
+            $headers = "From: bikestore@support.com";
+            mail($to, $subject, $msg, $headers);
+            header('location: pending.php?email=' . $email);
+            flash('forget', 'The email have been sent');
+            redirect('users/login');
+          } else {
+            flash('forget', 'sorry, there is something wrong happend :(', 'alert alert-danger');
+            redirect('users/login');
+          }
+        } else {
+          flash('forget', 'sorry, your email not exist :(', 'alert alert-warning');
+          redirect('users/login');
+        }
+      } else {
+        die('you are not allowed to get here :(');
+      }
+    }
+
   }

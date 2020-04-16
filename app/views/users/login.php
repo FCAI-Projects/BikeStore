@@ -12,6 +12,7 @@
           Log In
         </a>
         <form class="row" method="POST" action="<?php echo URLROOT ?>/users/login">
+          <?php flash('forget') ?>
           <div class="col-12 pl-0 pr-0 mb-2 mt-2">
           <input class=" form-control form-control-lg <?php echo (!empty($data['username_err'])) ? 'is-invalid' : '' ?>" type="text" name="username" id="username" placeholder="Type your username" value="<?php echo $data['username']; ?>"/>
           <div class="invalid-feedback"><?php echo $data['username_err'] ?></div>
@@ -35,7 +36,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form class="col-12">
+                <form class="col-12" method="POST" action="<?php echo URLROOT ?>/users/fogetPassword">
                   <input class="col-12 form-control form-control-lg mb-4" type="email" name="email" id="email" placeholder="example@example.com" />
                   <input class="col-12 form-control form-control-lg" id="log-submit" type="submit" value="Submit" />
                 </form>
