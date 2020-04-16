@@ -197,4 +197,15 @@
       }
     }
 
+    public function insertToken($data) {
+      $this->db->query('INSERT INTO passwordreset(email, token) VALUES(:email, :token)');
+      $this->db->bind(':email', $data['email']);
+      $this->db->bind(':token', $data['token']);
+      if ($this->db->execute()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
   }
