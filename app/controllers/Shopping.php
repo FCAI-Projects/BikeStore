@@ -1,5 +1,8 @@
 <?php
+namespace MVCPHP\controllers;
 
+
+use MVCPHP\libraries\Controller;
   class Shopping extends Controller {
     public function __construct() {
       $this->shopModel = $this->model('shop');

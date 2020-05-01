@@ -1,4 +1,6 @@
-<?php 
-  require_once '../app/bootstrap.php';
+<?php
+require_once '../app/bootstrap.php';
 
-  $init = new Core;
+use  MVCPHP\libraries\Core;
+
+$init = new Core;
