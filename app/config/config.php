@@ -1,4 +1,5 @@
 <?php
+// The Directory Separator Constant
 define('DS', DIRECTORY_SEPARATOR);
 // DB Params
 define('DB_HOST', 'localhost');
