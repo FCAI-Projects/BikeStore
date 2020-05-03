@@ -1,7 +1,8 @@
 <?php
 
 namespace MVCPHP\models;
-class shop {
+//add no interface
+class shop  {
   private $db;
 
   public function __construct() {
@@ -38,7 +39,7 @@ class shop {
 
   public function search($username, $id) {
     $this->db->query('SELECT * FROM shoppingcart WHERE username = :user AND productId = :id');
-    $this->db->bind(':user', $username,);
+    $this->db->bind(':user', $username);
     $this->db->bind(':id', $id);
     $this->db->execute();
     if ($this->db->rowCount() > 0) {

@@ -60,7 +60,7 @@ class Products extends Controller {
           $randomNum = rand(0, 100000);
           move_uploaded_file($photoTmp, 'img/uploads/' . $randomNum . '_' . $photoName);
           $data['photo'] = $randomNum . '_' . $photoName;
-          if ($this->userModel->addProduct($data)) {
+          if ($this->userModel->add($data)) {
             redirect('pages');
           } else {
             flash('error', 'something went wrong', 'alert alert-danger');
@@ -131,7 +131,7 @@ class Products extends Controller {
               move_uploaded_file($photoTmp, 'img/uploads/' . $randomNum . '_' . $photoName);
               $data['photo'] = $randomNum . '_' . $photoName;
             }
-            if ($this->userModel->editProduct($data)) {
+            if ($this->userModel->edit($data)) {
               redirect('pages');
             } else {
               flash('error', 'something went wrong', 'alert alert-danger');
@@ -164,7 +164,7 @@ class Products extends Controller {
     if (isLoggedIn()) {
       $item = $this->userModel->getProductById($id);
       if ($item->username == getUsername()) {
-        if ($this->userModel->deleteProduct($id)) {
+        if ($this->userModel->delete($id)) {
           redirect('pages');
         } else {
           die('something went wrong');

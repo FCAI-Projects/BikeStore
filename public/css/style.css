@@ -1,47 +1,155 @@
+/*linear-gradient(-45deg, #5e72e4, #2dce89)*/
+:root {
+  --main-color: #3498db;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
+
 body {
   min-height: 100vh;
 }
-.alert {
-  width: 75%!important;
-  margin: 12px auto!important;
+
+.settings {
+  position: fixed;
+  top: 300px;
+  left: -200px;
+  transition: 0.3s;
 }
+
+.open {
+  left: 0;
+}
+
+.settings .setting-icon {
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  right: -65px;
+  top: 0px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.settings .setting-options {
+  background-color: #333;
+  width: 200px;
+}
+
+.settings .option-box .color-list h3 {
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.settings .option-box .color-list {
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.settings .option-box .color-list li {
+  list-style: none;
+  border-radius: 5px;
+  width: 180px;
+  height: 30px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.settings .option-box .color-list li:nth-of-type(1) {
+  background: #3498db;
+}
+
+.settings .option-box .color-list li:nth-of-type(2) {
+  background: #9b59b6;
+}
+
+.settings .option-box .color-list li:nth-of-type(3) {
+  background: #34495e;
+}
+
+.settings .option-box .color-list li:nth-of-type(4) {
+  background: #2ecc71;
+}
+
+.settings .option-box .color-list li:nth-of-type(5) {
+  background: #1abc9c;
+}
+
+.settings .option-box .color-list li:nth-of-type(6) {
+  background: #f1c40f;
+}
+
+.settings .option-box .color-list li:nth-of-type(7) {
+  background: #e74c3c;
+}
+
+.settings .option-box .color-list li:nth-of-type(8) {
+  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+}
+
+.settings .option-box .color-list li:nth-of-type(9) {
+  background: linear-gradient(-45deg, #DA4453, #89216B);
+}
+
+.settings .option-box .color-list li:nth-of-type(10) {
+  background: linear-gradient(-45deg, #cc2b5e, #753a88);
+}
+
+.alert {
+  width: 75% !important;
+  margin: 12px auto !important;
+}
+
 p {
   color: #666;
 }
+
 input:focus, textarea:focus, button:focus {
   outline: none;
 }
+
 .customBtn {
-  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  background: var(--main-color);
   box-shadow: 3px 3px 9px #00000026;
   color: #ffffff;
-  border-radius: 50px;
+  border-radius: 5px;
   border: none;
   text-transform: uppercase;
   margin-bottom: 20px;
   display: inline-block;
   transition: ease-in-out 0.2s;
 }
-.customBtn:hover {
+.dropdown-item:active {
+  background: var(--main-color) !important;
+}
+.customBtn:hover,
+.customBtn:focus,
+.customBtn:active {
   box-shadow: 3px 3px 20px #00000036;
+  background: var(--main-color) !important;
 }
+
 .custom-thead {
-  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  background: var(--main-color);
 }
+
 .table .custom-thead th {
   color: #fff;
   background-color: transparent;
   border-color: transparent;
 }
+
 .table .custom-thead thead th {
   vertical-align: bottom;
   border-bottom: 2px solid transparent;
 }
+
 .custom-card {
   border: none;
   box-shadow: 5px 5px 20px #0404043b;
@@ -49,20 +157,23 @@ input:focus, textarea:focus, button:focus {
   transition: ease-in-out 0.2s;
   position: relative;
 }
+
 .custom-card:hover {
   box-shadow: 5px 5px 5px #0404043b;
 }
-.custom-card .price{
+
+.custom-card .price {
   position: absolute;
   top: 0;
   right: 0;
-  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  background: var(--main-color);
   color: #fff;
   font-size: 18px;
   padding: 5px 10px;
 }
+
 .custom-card .customBtn {
-  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  background: var(--main-color);
   box-shadow: none;
   color: #ffffff;
   border-radius: 5px;
@@ -72,39 +183,48 @@ input:focus, textarea:focus, button:focus {
   display: inline-block;
   transition: ease-in-out 0.2s;
 }
+
 .custom-card .customBtn:hover {
   box-shadow: 2px 2px 10px #0404043b;
 }
+
 .custom-link {
   color: #3c3c3c;
   text-decoration: none;
 }
+
 .custom-link:hover {
   color: #3c3c3c;
 }
+
 /*============================================== end grid ==============================================*/
 .navbar {
-  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  background: var(--main-color) !important;
 }
+
 .navbar a.nav-link,
 .navbar .navbar-brand {
   color: #fff !important;
 }
+
 .navbar .active a.nav-link {
   text-decoration: underline;
 }
+
 /*==================================start blog====================================================*/
 .blog .card-horizontal {
   box-shadow: 3px 3px 9px #00000026;
   border-radius: 3px;
   margin-top: 60px;
 }
+
 .blog .card-horizontal .img-square-wrapper {
   margin: 10px 10px 10px 10px;
   width: 250px;
-  height: 250px;    
+  height: 250px;
   overflow: hidden;
 }
+
 .blog .card-horizontal .img-square-wrapper img {
   width: 250px;
   height: 250px;
@@ -112,29 +232,35 @@ input:focus, textarea:focus, button:focus {
   height: 100%;
   border-radius: 50%;
 }
+
 .blog .card-horizontal .card-body {
   padding-left: 10px !important;
   padding-top: 10px;
 }
+
 .blog .card-horizontal .card-body .card-title {
   margin-top: 3px;
   margin-bottom: 3px;
 }
+
 .blog .card-horizontal .card-body a {
   text-decoration: none;
   color: #1b1e21;
 }
+
 .blog .card-horizontal .card-body i {
   margin-right: 10px;
   font-size: 16px;
   width: 8px;
 }
+
 /*============================================end blog======================================================*/
 
 /*============================================start post==================================================*/
 .post {
   margin-top: 80px;
 }
+
 .post_page_column {
   box-shadow: 3px 3px 9px #00000026;
   padding: 30px;
@@ -143,6 +269,7 @@ input:focus, textarea:focus, button:focus {
 .post .user {
   margin: 10px 0px 5px 0;
 }
+
 .post .post_img img {
   width: 100%;
   height: 100%;
@@ -156,15 +283,18 @@ input:focus, textarea:focus, button:focus {
 .comment {
   margin: 30px 0 50px 0;
 }
+
 .comment h2 {
   margin: 50px 0 10px 0;
   text-transform: uppercase;
 }
+
 .comment-container {
   box-shadow: 3px 3px 9px #00000026;
   padding: 30px;
   position: relative;
 }
+
 .comment .comment-box {
   position: relative;
 }
@@ -175,18 +305,22 @@ input:focus, textarea:focus, button:focus {
   border-radius: 50%;
   padding: 3px;
 }
+
 .comment .comment-box .comment-date {
   font-size: 18px;
   position: absolute;
   top: 4px;
   right: 20px;
 }
+
 .comment .comment-body p {
   width: 95%;
 }
+
 .comment .comment-body h3 {
   font-size: 22px;
 }
+
 .comment .comment-container a.reply-link {
   color: black;
   text-decoration: underline;
@@ -194,8 +328,9 @@ input:focus, textarea:focus, button:focus {
   right: 10px;
   bottom: 5px;
 }
+
 .write-comment {
-  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  background: var(--main-color);
   box-shadow: 3px 3px 9px #00000026;
   color: #ffffff;
   border-radius: 50px;
@@ -207,9 +342,11 @@ input:focus, textarea:focus, button:focus {
   display: block;
   transition: ease-in-out 0.2s;
 }
+
 .write-comment:hover {
   box-shadow: 3px 3px 20px #00000036;
 }
+
 /*============================================end comment==================================================*/
 
 /*============================================start write comment==================================================*/
@@ -224,14 +361,17 @@ input:focus, textarea:focus, button:focus {
   font-weight: bold;
   margin-bottom: 20px;
 }
+
 .modal .modal-body textarea {
   resize: none;
   padding: 10px;
   border: 1px solid rgb(231, 231, 231);
 }
+
 .modal .modal-footer {
   border-top: none !important;
 }
+
 /*============================================end write comment==================================================*/
 
 
@@ -246,6 +386,7 @@ input:focus, textarea:focus, button:focus {
   width: 100%;
   height: 30px;*/
 }
+
 /*============================================end footer==================================================*/
 /*============================================start login==================================================*/
 .hidden {
@@ -255,17 +396,20 @@ input:focus, textarea:focus, button:focus {
 .visible-form {
   display: block;
 }
+
 .forms {
-  background: linear-gradient(-45deg, #5e72e4, #2dce89);
+  background: var(--main-color);
   width: 100%;
   height: 100vh;
   display: flex;
 }
+
 .forms section {
   width: 40%;
   margin: auto;
   padding: 30px;
 }
+
 .forms section > div {
   margin-top: 30px;
   display: flex;
@@ -275,36 +419,45 @@ input:focus, textarea:focus, button:focus {
   background-color: #fff;
   border-radius: 5px;
   padding: 20px !important;
+  box-shadow: 0 5px 20px #00000085;
 }
+
 .forms section > div a.login,
 .forms section > div a.signup {
-  color: #2dce89 !important;
+  color: #333 !important;
   box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1) !important;
   padding: 10px 0 !important;
   border: none;
 }
+
 .forms section > div a.active {
-  background-image: linear-gradient(-45deg, #5e72e4, #2dce89)  !important;
+  background: var(--main-color) !important;
   color: #fff !important;
 }
+
 .forms section > div form {
   padding: 30px 0 0 !important;
 }
+
 .forms section > div form input[type="submit"] {
   box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1) !important;
-  background-image: linear-gradient(-45deg, #5e72e4, #2dce89) !important;
+  background: var(--main-color) !important;
   color: #fff !important;
 }
+
 .forms section > div form .log-forget-pass {
   border: none !important;
 }
+
 .forms section > div form .log-forget-pass {
   border: 1px solid #ccc;
 }
+
 .forms section > div .row {
   margin: 0;
   padding: 0;
 }
+
 .forms .forget-pass-form {
   position: absolute;
   height: 100%;
@@ -313,17 +466,21 @@ input:focus, textarea:focus, button:focus {
   left: 0;
   background: rgba(0, 0, 0, 0.5);
 }
+
 .forms .forget-pass-form section.forget-form {
   overflow: hidden;
 }
+
 .forms .forget-pass-form section.forget-form h3 {
   padding-left: 0;
 }
+
 .forms .forget-pass-form section.forget-form span {
   cursor: pointer;
   display: flex;
   width: 15px;
 }
+
 .forms .forget-pass-form section.forget-form form {
   padding-top: 0px !important;
 }

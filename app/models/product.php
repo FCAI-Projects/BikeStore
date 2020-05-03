@@ -1,15 +1,17 @@
 <?php
 
 namespace MVCPHP\models;
-class product {
-  private $db;
+// add edit list delete
 
+class product implements rule {
+  private $db;
+   
   public function __construct() {
     global $registry;
     $this->db = $registry->get('db');
   }
 
-  public function addProduct($data) {
+  public function add($data) {
     $this->db->query('INSERT INTO products(username, name, photoName, features, price, quantity, rentStatus, isBike, isNew) VALUES(:user, :name, :photo, :feature, :price, :quantity, :renting, :isBike, :isNew)');
     $this->db->bind(':user', $data['username']);
     $this->db->bind(':name', $data['name']);
@@ -27,7 +29,7 @@ class product {
     }
   }
 
-  public function editProduct($data) {
+  public function edit($data) {
     if (!empty($data['photo'])) {
       $this->db->query('UPDATE products SET name = :name, photoName=:photo, features=:feature, price=:price, quantity=:quantity, rentStatus=:renting, isBike=:isBike, isNew=:isNew WHERE productId = :id');
       $this->db->bind(':photo', $data['photo']);
@@ -49,7 +51,7 @@ class product {
     }
   }
 
-  public function allProducts() {
+  public function list() {
     $this->db->query('SELECT * FROM products ORDER BY productId DESC');
     return $this->db->resultSet();
   }
@@ -66,7 +68,7 @@ class product {
     return $this->db->single();
   }
 
-  public function deleteProduct($id) {
+  public function delete($id) {
     $this->db->query('DELETE FROM products WHERE productId = :id');
     $this->db->bind(':id', $id);
     if ($this->db->execute()) {
@@ -81,6 +83,12 @@ class product {
     $this->db->bind(':username', $data['username']);
     $this->db->bind(':id', $data['productId']);
     $this->db->execute();
+  }
+  
+  public function search($search) {
+    $this->db->query('SELECT * FROM products WHERE name like :search ORDER BY productId DESC');
+    $this->db->bind(':search', '%' .$search . '%');
+    return $this->db->resultSet();
   }
 
 }

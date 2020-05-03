@@ -2,10 +2,12 @@
 <div class="container">
   <?php flash('error')  ?>
   <h1 class="text-center mt-4 mb-5" style="color: #333">All Products</h1>
+  <form method="get" action="">
+    <input type="text" id="search" name="search" placeholder="Search ..." class="form-control form-control-lg" value="<?= isset($_GET['search'])? $_GET['search'] : '' ?>">
+  </form>
   <div class="row mt-5">
     
   <?php
-
       foreach ($data['products'] as $item) {
         if ($item->quantity != 0) {
         echo '<div class="col-4 mb-4">';

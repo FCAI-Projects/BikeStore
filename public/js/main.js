@@ -1,32 +1,29 @@
 $(function() {
-
   'use strict';
-
   $('.confirm').click(function () {
 		return confirm('Are you sure??');
 	});
-/*
-  // Main site variables.
-  var loginBtn    = $('.main-form .login'),
-      mainForm    = $('.main-form'),
-      signUpBtn   = $('.login-form .signup'),
-      loginForm   = $('.login-form');
-
-
-
-  loginBtn.on("click", function() {
-
-      mainForm.addClass("hidden");
-      loginForm.addClass("visible-form");
-      loginForm.removeClass("hidden");
-
-  });
-
-  signUpBtn.on("click", function() {
-
-      loginForm.removeClass("visible-form").addClass("hidden");
-      mainForm.removeClass("hidden");
-  
-  });
-*/
 });
+
+const mainColor = localStorage.getItem('main-color');
+
+if (mainColor) {
+  document.documentElement.style.setProperty('--main-color', mainColor);
+}
+
+const elements = {
+  colorLi: document.querySelectorAll('.settings .color-list li'),
+  settingIcon: document.querySelector('.settings .setting-icon'),
+  setting: document.querySelector('.settings'),
+};
+
+elements.settingIcon.onclick = () => {
+  elements.setting.classList.toggle('open');
+}
+
+ elements.colorLi.forEach(li => {
+   li.addEventListener('click', () => {
+     document.documentElement.style.setProperty('--main-color', li.dataset.color);
+     localStorage.setItem('main-color', li.dataset.color);
+   });
+ });

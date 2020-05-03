@@ -62,7 +62,7 @@ class Posts extends Controller {
   }
 
   public function blog() {
-    $data = ['posts' => $this->postModel->allPosts()];
+    $data = ['posts' => $this->postModel->list()];
 
     $this->view('pages/blog', $data);
   }
@@ -112,7 +112,7 @@ class Posts extends Controller {
     if (isLoggedIn()) {
       $post = $this->postModel->getUsernameOfPost($id);
       if ($post->username == getUsername()) {
-        $this->postModel->removePost($id);
+        $this->postModel->delete($id);
         redirect('pages/blog');
       } else {
         die('you are not allowed');
@@ -159,7 +159,7 @@ class Posts extends Controller {
             } else {
               $data['photo'] = '';
             }
-            if ($this->postModel->editPost($data)) {
+            if ($this->postModel->edit($data)) {
               redirect('pages');
             } else {
               die('something went wrong');

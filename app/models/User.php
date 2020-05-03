@@ -1,7 +1,8 @@
 <?php
 
 namespace MVCPHP\models;
-class User {
+//edit list add
+class User implements rule {
 
   private $db;
 
@@ -10,7 +11,7 @@ class User {
     $this->db = $registry->get('db');
   }
 
-  public function register($data) {
+  public function add($data) {
     $this->db->query('INSERT INTO users(username, firstName, lastName, email, password, gender, telephone) VALUES(:username, :fname, :lname, :email, :pass, :gender, :phone)');
     $this->db->bind(':username', $data['username']);
     $this->db->bind(':fname', $data['firstName']);
@@ -60,7 +61,7 @@ class User {
     }
   }
 
-  public function update($data) {
+  public function edit($data) {
     if (empty($data['photo'])) {
       if (empty($data['password'])) {
         $this->db->query('UPDATE users SET firstName = :fname, lastName = :lname, email = :email, telephone = :phone WHERE username = :username');
@@ -139,7 +140,7 @@ class User {
     }
   }
 
-  public function allUsers() {
+  public function list() {
     $this->db->query('SELECT * FROM users ORDER BY createdAt DESC');
     return $this->db->resultSet();
   }

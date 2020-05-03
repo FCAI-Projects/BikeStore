@@ -1,7 +1,8 @@
 <?php
 
 namespace MVCPHP\models;
-class post {
+// add delete edit list  
+class post implements rule {
   private $db;
 
   public function __construct() {
@@ -22,7 +23,7 @@ class post {
     }
   }
 
-  public function allPosts() {
+  public function list() {
     $this->db->query('SELECT * FROM posts ORDER BY postDate DESC');
     return $this->db->resultSet();
   }
@@ -48,7 +49,7 @@ class post {
   }
 
 
-  public function removePost($id) {
+  public function delete($id) {
     $this->db->query('DELETE FROM posts WHERE postId = :id');
     $this->db->bind(':id', $id);
     $this->db->execute();
@@ -66,7 +67,7 @@ class post {
     return $this->db->single();
   }
 
-  public function editPost($data) {
+  public function edit($data) {
     if (empty($data['photo'])) {
       $this->db->query('UPDATE posts SET postTitle = :title, postContent = :content WHERE postId = :id');
     } else {

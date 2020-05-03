@@ -50,7 +50,7 @@ class Users extends Controller {
           $this->view('users/register', $data);
         } else {
           $data['pass'] = password_hash($data['pass'], PASSWORD_DEFAULT);
-          if ($this->userModel->register($data)) {
+          if ($this->userModel->add($data)) {
             $_SESSION['username'] = $data['username'];
             $_SESSION['isAdmin'] = false;
             redirect('pages');
@@ -151,7 +151,7 @@ class Users extends Controller {
             move_uploaded_file($photoTmp, 'img/uploads/' . $randomNum . '_' . $photoName);
             $data['photo'] = $randomNum . '_' . $photoName;
           }
-          if ($this->userModel->update($data)) {
+          if ($this->userModel->edit($data)) {
             flash('sucess-edit', 'Changes Saved Successfully');
             redirect('users/edit');
           } else {
