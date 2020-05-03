@@ -210,5 +210,11 @@ class User implements rule {
       return false;
     }
   }
+  
+  public function getOrdersForUsrename($username, $select) {
+    $this->db->query("SELECT $select FROM orders INNER JOIN products ON orders.productId = products.productId WHERE orders.username = :username");
+    $this->db->bind(':username', $username);
+    return $this->db->resultSet();
+  }
 
 }

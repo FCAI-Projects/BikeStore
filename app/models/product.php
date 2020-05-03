@@ -56,8 +56,8 @@ class product implements rule {
     return $this->db->resultSet();
   }
 
-  public function allProductsByUsername($username) {
-    $this->db->query('SELECT * FROM products WHERE username = :username');
+  public function allProductsByUsername($username, $select = '*') {
+    $this->db->query("SELECT $select FROM products WHERE username = :username");
     $this->db->bind(':username', $username);
     return $this->db->resultSet();
   }
@@ -90,5 +90,6 @@ class product implements rule {
     $this->db->bind(':search', '%' .$search . '%');
     return $this->db->resultSet();
   }
+  
 
 }

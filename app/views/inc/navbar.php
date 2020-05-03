@@ -61,6 +61,7 @@
             <a class="dropdown-item" href="<?php echo URLROOT ?>/products/add">Add Product</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/posts/add">Add Post</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/posts/allposts">All My Posts</a>
+            <a class="dropdown-item" href="<?= URLROOT ?>/users/activites">Download Acticties</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/logout">Log Out</a>
           </div>
