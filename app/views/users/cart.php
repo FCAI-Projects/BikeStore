@@ -19,7 +19,7 @@
                   if (getUsername() == $item->username) {
                     echo '<a href="'.URLROOT.'/products/edit/'.$item->productId.'" class="btn btn-light mr-1 col">Edit</a>';
                   }else {
-                    echo '<a href="'.URLROOT.'/shopping/buy/'.$item->productId.'" class="btn btn-primary customBtn mr-1 col">Buy</a>';
+                    echo '<a href="'.URLROOT.'/order/buy/'.$item->productId.'" class="btn btn-primary customBtn mr-1 col">Buy</a>';
                   }
                 }
                 echo '<button type="button" class="btn btn-link custom-link ml-1 col" data-toggle="modal" data-target="#exampleModal'.$item->productId.'">See Features</button>';

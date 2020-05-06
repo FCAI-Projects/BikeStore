@@ -22,7 +22,7 @@
 
 ?>
 
-    <form style="width: 40%" class="mx-auto mt-5" method="POST" action="<?php echo URLROOT ?>/shopping/buy/<?php echo  $item->productId ?>">
+    <form style="width: 40%" class="mx-auto mt-5" method="POST" action="<?php echo URLROOT ?>/order/buy/<?php echo  $item->productId ?>">
       <div class="form-group">
         <label for="quantity">Quantity</label>
         <input type="number" class="form-control" id="quantity" name="quantity" min='1' value='1' max="<?php echo $item->quantity  ?>">

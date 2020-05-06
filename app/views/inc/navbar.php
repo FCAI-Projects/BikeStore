@@ -51,7 +51,7 @@
             <?php else: ?>
               <a class="dropdown-item" href="<?php echo URLROOT ?>/users/edit">Setting</a>
             <?php endif; ?>
-            <a class="dropdown-item" href="<?php echo URLROOT ?>/users/allOrders">All Orders</a>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/order">All Orders</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/payment">Add Payment</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/allRents">Renting</a>
             <?php if(!isAdmin()): ?>

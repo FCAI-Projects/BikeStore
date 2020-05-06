@@ -188,16 +188,7 @@ class Users extends Controller {
     }
   }
 
-  public function allOrders() {
-    if (isLoggedIn()) {
-      $data = ['products' => $this->userModel->getOrdersForUser(getUsername())];
 
-      $this->view('users/orders', $data);
-    } else {
-      flash('error', 'Sorry, You need to login first', 'alert alert-danger');
-      redirect('pages/index');
-    }
-  }
 
   public function allRents() {
     if (isLoggedIn()) {

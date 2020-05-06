@@ -10,8 +10,10 @@ class Products extends Controller {
   public function __construct() {
     $this->userModel = $this->model('product');
     $this->shopModel = $this->model('shop');
+    $this->itemModel = $this->model('product');
   }
 
+  
   public function index() {
     $this->show();
   }
