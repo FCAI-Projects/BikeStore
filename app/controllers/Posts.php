@@ -10,7 +10,7 @@ class Posts extends Controller {
   public function __construct() {
     $this->postModel = $this->model('post');
   }
-  
+
   public function index() {
     $this->blog();
   }
@@ -72,36 +72,46 @@ class Posts extends Controller {
   }
 
 
-  public function show($id) {
-    $data = ['post' => $this->postModel->getPostById($id), 'comments' => $this->postModel->getPostComments($id),];
-    $this->view('pages/post', $data);
+  public function show($id = -1) {
+    if ($id == -1) {
+      redirect('pages');
+    } else {
+      $data = ['post' => $this->postModel->getPostById($id), 'comments' => $this->postModel->getPostComments($id),];
+      $this->view('pages/post', $data);
+    }
+
   }
 
-  public function comment($id) {
-    if (isLoggedIn()) {
-      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $data = ['username' => getUsername(), 'postId' => $id, 'comment' => $_POST['comment'], 'comment_err' => '',];
-        if (empty($data['comment'])) {
-          $data['comment_err'] = 'Comment can not be empty :(';
-        }
+  public function comment($id = -1) {
+    if ($id == -1) {
+      redirect('pages');
+    } else {
+      if (isLoggedIn()) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $data = ['username' => getUsername(), 'postId' => $id, 'comment' => $_POST['comment'], 'comment_err' => '',];
+          if (empty($data['comment'])) {
+            $data['comment_err'] = 'Comment can not be empty :(';
+          }
 
-        if (empty($data['comment_err'])) {
-          $this->postModel->addComment($data);
-          flash('post-message', 'Comment Seccessfully Added :)');
-          redirect('posts/blog');
+          if (empty($data['comment_err'])) {
+            $this->postModel->addComment($data);
+            flash('post-message', 'Comment Seccessfully Added :)');
+            redirect('posts/blog');
+          } else {
+            flash('post-message', $data['comment_err'], 'alert alert-danger');
+            redirect('posts/blog');
+          }
+
         } else {
-          flash('post-message', $data['comment_err'], 'alert alert-danger');
-          redirect('posts/blog');
+          flash('error', 'you are not allowed to get here', 'alert alert-danger');
+          redirect('pages/index');
         }
-
       } else {
-        flash('error', 'you are not allowed to get here', 'alert alert-danger');
+        flash('error', 'you are not allowed you should sign in', 'alert alert-danger');
         redirect('pages/index');
       }
-    } else {
-      flash('error', 'you are not allowed you should sign in', 'alert alert-danger');
-      redirect('pages/index');
     }
+
   }
 
 
@@ -112,78 +122,88 @@ class Posts extends Controller {
     }
   }
 
-  public function remove($id) {
-    if (isLoggedIn()) {
-      $post = $this->postModel->getUsernameOfPost($id);
-      if ($post->username == getUsername()) {
-        $this->postModel->delete($id);
-        redirect('pages/blog');
-      } else {
-        die('you are not allowed');
-      }
+  public function remove($id = -1) {
+    if ($id == -1) {
+      redirect('pages');
     } else {
-      die('you are not allowed, you need to sign in');
+      if (isLoggedIn()) {
+        $post = $this->postModel->getUsernameOfPost($id);
+        if ($post->username == getUsername()) {
+          $this->postModel->delete($id);
+          redirect('pages/blog');
+        } else {
+          die('you are not allowed');
+        }
+      } else {
+        die('you are not allowed, you need to sign in');
+      }
     }
+
   }
 
-  public function edit($id) {
-    if (isLoggedIn()) {
-      $post = $this->postModel->getUsernameOfPost($id);
-      if ($post->username == getUsername()) {
+  public function edit($id = -1) {
+    if ($id == -1) {
+      redirect('pages');
+    } else {
+      if (isLoggedIn()) {
+        $post = $this->postModel->getUsernameOfPost($id);
+        if ($post->username == getUsername()) {
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-          $data = ['username' => getUsername(), 'id' => $id, 'title' => $_POST['title'], 'content' => $_POST['content'], 'photo' => $_FILES['photo'], 'title_err' => '', 'content_err' => '', 'photo_err' => '',];
+          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = ['username' => getUsername(), 'id' => $id, 'title' => $_POST['title'], 'content' => $_POST['content'], 'photo' => $_FILES['photo'], 'title_err' => '', 'content_err' => '', 'photo_err' => '',];
 
-          $photoName = $_FILES['photo']['name'];
-          $photoSize = $_FILES['photo']['name'];
-          $photoTmp = $_FILES['photo']['tmp_name'];
-          $photoType = $_FILES['photo']['type'];
+            $photoName = $_FILES['photo']['name'];
+            $photoSize = $_FILES['photo']['name'];
+            $photoTmp = $_FILES['photo']['tmp_name'];
+            $photoType = $_FILES['photo']['type'];
 
-          $photoAllowedExtention = array('jpeg', 'jpg', 'png', 'gif');
-          $photoExtention = explode('.', $photoName);
-          $photoExtention = end($photoExtention);
-          $photoExtention = strtolower($photoExtention);
+            $photoAllowedExtention = array('jpeg', 'jpg', 'png', 'gif');
+            $photoExtention = explode('.', $photoName);
+            $photoExtention = end($photoExtention);
+            $photoExtention = strtolower($photoExtention);
 
-          if (empty($data['title'])) {
-            $data['title_err'] = 'Please fill the title field';
-          }
-          if (empty($data['content'])) {
-            $data['content_err'] = 'Please fill the content field';
-          }
-          if (!in_array($photoExtention, $photoAllowedExtention) && !empty($photoName)) {
-            $data['photo_err'] = 'Sorry, The Extention Not Allowed :(';
-          }
-
-          if (empty($data['title_err']) && empty($data['content_err']) && empty($data['photo_err'])) {
-            if (!empty($photoName)) {
-              $randomNum = rand(0, 100000);
-              move_uploaded_file($photoTmp, 'img/uploads/' . $randomNum . '_' . $photoName);
-              $data['photo'] = $randomNum . '_' . $photoName;
-            } else {
-              $data['photo'] = '';
+            if (empty($data['title'])) {
+              $data['title_err'] = 'Please fill the title field';
             }
-            if ($this->postModel->edit($data)) {
-              redirect('pages');
-            } else {
-              die('something went wrong');
+            if (empty($data['content'])) {
+              $data['content_err'] = 'Please fill the content field';
             }
+            if (!in_array($photoExtention, $photoAllowedExtention) && !empty($photoName)) {
+              $data['photo_err'] = 'Sorry, The Extention Not Allowed :(';
+            }
+
+            if (empty($data['title_err']) && empty($data['content_err']) && empty($data['photo_err'])) {
+              if (!empty($photoName)) {
+                $randomNum = rand(0, 100000);
+                move_uploaded_file($photoTmp, 'img/uploads/' . $randomNum . '_' . $photoName);
+                $data['photo'] = $randomNum . '_' . $photoName;
+              } else {
+                $data['photo'] = '';
+              }
+              if ($this->postModel->edit($data)) {
+                redirect('pages');
+              } else {
+                die('something went wrong');
+              }
+            } else {
+              $this->view('users/addPost', $data);
+            }
+
           } else {
-            $this->view('users/addPost', $data);
+            $data = ['username' => getUsername(), 'id' => $id, 'title' => $post->postTitle, 'content' => str_replace('<br />', '', $post->postContent), 'photo' => '', 'title_err' => '', 'content_err' => '', 'photo_err' => '',];
+            $this->view('users/editPost', $data);
           }
+
 
         } else {
-          $data = ['username' => getUsername(), 'id' => $id, 'title' => $post->postTitle, 'content' => str_replace('<br />', '', $post->postContent), 'photo' => '', 'title_err' => '', 'content_err' => '', 'photo_err' => '',];
-          $this->view('users/editPost', $data);
+          die('you are not allowed');
         }
-
-
       } else {
-        die('you are not allowed');
+        die('you are not allowed, you need to sign in');
       }
-    } else {
-      die('you are not allowed, you need to sign in');
     }
+
   }
 
 }

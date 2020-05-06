@@ -5,7 +5,7 @@ namespace MVCPHP\models;
 
 class product implements rule {
   private $db;
-   
+
   public function __construct() {
     global $registry;
     $this->db = $registry->get('db');
@@ -84,12 +84,17 @@ class product implements rule {
     $this->db->bind(':id', $data['productId']);
     $this->db->execute();
   }
-  
+
   public function search($search) {
     $this->db->query('SELECT * FROM products WHERE name like :search ORDER BY productId DESC');
-    $this->db->bind(':search', '%' .$search . '%');
+    $this->db->bind(':search', '%' . $search . '%');
     return $this->db->resultSet();
   }
-  
+
+  public function getOrdersForSeller($username) {
+    $this->db->query('SELECT orders.orderQuantity, products.*  FROM orders INNER JOIN products ON orders.productId = products.productId  WHERE products.username = :user');
+    $this->db->bind(':user', $username);
+    return $this->db->resultSet();
+  }
 
 }
