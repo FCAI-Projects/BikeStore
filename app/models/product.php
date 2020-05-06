@@ -92,7 +92,7 @@ class product implements rule {
   }
 
   public function getOrdersForSeller($username) {
-    $this->db->query('SELECT orders.orderQuantity, products.*  FROM orders INNER JOIN products ON orders.productId = products.productId  WHERE products.username = :user');
+    $this->db->query('SELECT orders.orderQuantity, products.*  FROM orders INNER JOIN products ON orders.productId = products.productId  WHERE products.username = :user ORDER BY orderDate DESC');
     $this->db->bind(':user', $username);
     return $this->db->resultSet();
   }
