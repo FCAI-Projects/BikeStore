@@ -13,7 +13,7 @@ class Products extends Controller {
   }
 
   public function index() {
-    $this->add();
+    $this->show();
   }
 
   public function add() {

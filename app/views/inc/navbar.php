@@ -46,7 +46,11 @@
             <?php echo getUsername() ?>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="<?php echo URLROOT ?>/users/edit">Setting</a>
+            <?php if (isAdmin()): ?>
+            <a class="dropdown-item" href="<?php echo URLROOT ?>/admin/edit">Setting</a>
+            <?php else: ?>
+              <a class="dropdown-item" href="<?php echo URLROOT ?>/users/edit">Setting</a>
+            <?php endif; ?>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/allOrders">All Orders</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/payment">Add Payment</a>
             <a class="dropdown-item" href="<?php echo URLROOT ?>/users/allRents">Renting</a>

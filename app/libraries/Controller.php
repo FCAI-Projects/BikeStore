@@ -25,4 +25,8 @@ class Controller {
       die('View does not exist');
     }
   }
+  
+  public  function index() {
+    return null;
+  }
 }

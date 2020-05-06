@@ -8,6 +8,10 @@ use MVCPHP\libraries\Controller;
       $this->shopModel = $this->model('shop');
       $this->itemModel = $this->model('product');
     }
+    
+    public function index() {
+      $this->show();
+    }
 
     public function add($id) {
       if (isLoggedIn()) {
