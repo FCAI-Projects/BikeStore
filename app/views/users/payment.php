@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'?>
-
+<?php flash('removed-payment'); ?>
 <h1 class="text-center mt-4 mb-5" style="color: #333">Add New Payment</h1>
 <form class="mx-auto" style="width: 40%" method="POST" action="<?php echo URLROOT; ?>/users/payment">
   <div class="form-group">
@@ -28,6 +28,7 @@
       <th>VISA Number</th>
       <th>PIN</th>
       <th>Money</th>
+      <th>Control</th>
     </tr>
   </thead>
   <tbody>
@@ -37,6 +38,7 @@
           echo '<th>' . $payment->visaNumber . '</th>';
           echo '<th>' . $payment->pin . '</th>';
           echo '<th>$' . $payment->money . '</th>';
+          echo '<th><a href="'.URLROOT.'/users/rpayment/'.$payment->visaNumber.'" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a></th>';
         echo '</tr>';
       }
     ?>

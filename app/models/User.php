@@ -175,6 +175,16 @@ class User implements rule {
     $this->db->bind(':username', $username);
     return $this->db->resultSet();
   }
+  
+  public function rmvPayment($visa) {
+    $this->db->query('DELETE FROM payment WHERE visaNumber = :visa');
+    $this->db->bind(':visa', $visa);
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   public function getOrdersForUser($username) {
     $this->db->query('SELECT orders.orderQuantity, products.*  FROM orders INNER JOIN products ON orders.productId = products.productId  WHERE orders.username = :user');
@@ -217,4 +227,14 @@ class User implements rule {
     return $this->db->resultSet();
   }
 
+  public function deleteUser($username) {
+    $this->db->query('DELETE FROM users WHERE username = :username');
+    $this->db->bind(':username', $username);
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
 }

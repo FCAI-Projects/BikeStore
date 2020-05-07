@@ -190,6 +190,17 @@ class Users extends Controller {
       redirect('pages/index');
     }
   }
+  
+  public function rpayment($visa) {
+    if ($visa) {
+      if ($this->userModel->rmvPayment($visa)) {
+        flash('removed-payment', 'Visa Number Removed Successfully');
+        redirect('users/payment');
+      } else {
+        flash('removed-payment', 'Sorry, Something went wrong :(', 'alert alert-danger');
+      }
+    }
+  }
 
 
   public function allRents() {

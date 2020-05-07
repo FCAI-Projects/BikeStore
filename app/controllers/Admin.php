@@ -32,5 +32,16 @@ class Admin extends Controller {
     $data = ['usres' => $this->userModel->list()];
     $this->view('admin/users', $data);
   }
+  
+  public function ruser($username) {
+    if ($username) {
+      if ($this->userModel->deleteUser($username)) {
+        flash('user-dlt', 'The user deleted successfully :)');
+        redirect('admin/users');
+      } else {
+        flash('user-dlt', 'Sorry, Something went wrong :(', 'alert alert-danger');
+      }
+    }
+  }
 
 }

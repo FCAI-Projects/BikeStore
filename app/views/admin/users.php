@@ -3,6 +3,7 @@
 
 <table class="table mx-auto mt-5 text-center" style="width: 60%">
 <h1 class="text-center mb-5 mt-5" style="color: #333">All Usres</h1>
+  <?php flash('user-dlt'); ?>
   <thead class="thead-dark custom-thead">
     <tr>
       <th scope="col">username</th>
@@ -28,7 +29,7 @@
           echo '<th>' . $user->telephone . '</th>';
           echo '<th>' . (($user->gender == 1)? 'Male' : 'Female') . '</th>';
           echo '<th>' . $user->createdAt . '</th>';
-          echo '<th>' . 'btns' . '</th>';
+          echo '<th><a href="'.URLROOT.'/admin/ruser/'.$user->username .'" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a></th>';
         echo '</tr>';
 
       }
