@@ -4,7 +4,7 @@
 namespace MVCPHP\models;
 
 
-interface rule {
+interface strategy {
   public function add($data);
 
   public function edit($data);

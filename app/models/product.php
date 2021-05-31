@@ -3,7 +3,7 @@
 namespace MVCPHP\models;
 // add edit list delete
 
-class product implements rule {
+class product implements strategy {
   private $db;
 
   public function __construct() {

@@ -2,7 +2,7 @@
 
 namespace MVCPHP\models;
 //edit list add
-class User implements rule {
+class User implements strategy {
 
   private $db;
 

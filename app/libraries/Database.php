@@ -1,6 +1,7 @@
 <?php
 
 namespace MVCPHP\libraries;
+require("Immutable.php");
 /*
  * PDO Database Class
  * Connect to database
@@ -9,24 +10,23 @@ namespace MVCPHP\libraries;
  */
 
 class Database {
-  private $host = DB_HOST;
-  private $user = DB_USER;
-  private $pass = DB_PASS;
-  private $dbname = DB_NAME;
-
+  
+  private $immutable;
   private $dbh;
   private $stmt;
   private $error;
 
   public function __construct() {
+    $this->immutable = new ImmutableDB();
     // Set DNS
-    $dns = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+    $dns = 'mysql:host=' . $this->immutable->getHost() . ';dbname=' . $this->immutable->getDBName();
     $options = array(\PDO::ATTR_PERSISTENT => true, \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,);
     // Create PDO instance
     try {
-      $this->dbh = new \PDO($dns, $this->user, $this->pass, $options);
+      $this->dbh = new \PDO($dns, $this->immutable->getUser(), $this->immutable->getPassword(), $options);
 
     } catch (\PDOException $e) {
+      die($this->immutable->getHost());
       $this->error = $e->getMessage();
       echo $this->error;
     }

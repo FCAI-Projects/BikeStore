@@ -2,7 +2,7 @@
 
 namespace MVCPHP\models;
 // add delete edit list  
-class post implements rule {
+class post implements strategy {
   private $db;
 
   public function __construct() {
