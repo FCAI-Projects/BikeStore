@@ -2,66 +2,24 @@
 
 namespace MVCPHP\models;
 //edit list add
-class User implements strategy {
+class User implements Strategy {
 
   private $db;
+  private $context;
 
   public function __construct() {
     global $registry;
     $this->db = $registry->get('db');
+    $this->context = new Context(new UserAdd());
   }
 
   public function add($data) {
-    $this->db->query('INSERT INTO users(username, firstName, lastName, email, password, gender, telephone) VALUES(:username, :fname, :lname, :email, :pass, :gender, :phone)');
-    $this->db->bind(':username', $data['username']);
-    $this->db->bind(':fname', $data['firstName']);
-    $this->db->bind(':lname', $data['lastName']);
-    $this->db->bind(':email', $data['email']);
-    $this->db->bind(':pass', $data['pass']);
-    $this->db->bind(':gender', $data['gender']);
-    $this->db->bind(':phone', $data['phone']);
-
-    if ($this->db->execute()) {
-      return true;
-    } else {
-      return false;
-    }
+    return $this->context->executeStrategy($data);
   }
 
-  public function login($data) {
-    $this->db->query('SELECT * FROM users WHERE username = :username');
-    $this->db->bind(':username', $data['username']);
-    $row = $this->db->single();
-    if (password_verify($data['password'], $row->password)) {
-      return $row;
-    } else {
-      return false;
-    }
-  }
-
-  public function usernameExist($user) { // if the username exist will return true(the row)
-    $this->db->query('SELECT * FROM users WHERE username = :user');
-    $this->db->bind(':user', $user);
-    $row = $this->db->single();
-    if ($this->db->rowCount() > 0) {
-      return $row;
-    } else {
-      return false;
-    }
-  }
-
-  public function emailExist($email) { // if the email exist will return true
-    $this->db->query('SELECT * FROM users WHERE email = :email');
-    $this->db->bind(':email', $email);
-    $this->db->execute();
-    if ($this->db->rowCount() > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  public function edit($data) {
+  
+  public function edit($data): bool
+  {
     if (empty($data['photo'])) {
       if (empty($data['password'])) {
         $this->db->query('UPDATE users SET firstName = :fname, lastName = :lname, email = :email, telephone = :phone WHERE username = :username');
@@ -106,6 +64,44 @@ class User implements strategy {
     }
   }
 
+  public function list() {
+    $this->db->query('SELECT * FROM users ORDER BY createdAt DESC');
+    return $this->db->resultSet();
+  }
+
+  public function login($data) {
+    $this->db->query('SELECT * FROM users WHERE username = :username');
+    $this->db->bind(':username', $data['username']);
+    $row = $this->db->single();
+    if (password_verify($data['password'], $row->password)) {
+      return $row;
+    } else {
+      return false;
+    }
+  }
+
+  public function usernameExist($user) { // if the username exist will return true(the row)
+    $this->db->query('SELECT * FROM users WHERE username = :user');
+    $this->db->bind(':user', $user);
+    $row = $this->db->single();
+    if ($this->db->rowCount() > 0) {
+      return $row;
+    } else {
+      return false;
+    }
+  }
+
+  public function emailExist($email) { // if the email exist will return true
+    $this->db->query('SELECT * FROM users WHERE email = :email');
+    $this->db->bind(':email', $email);
+    $this->db->execute();
+    if ($this->db->rowCount() > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public function addService($date) {
     $this->db->query('INSERT INTO bikeservicing(username, serviceDate) VALUES(:username, :date)');
     $this->db->bind(':date', $date);
@@ -116,7 +112,6 @@ class User implements strategy {
       return false;
     }
   }
-
 
   public function allServiceForUsername($username) {
     $this->db->query('SELECT * FROM bikeservicing WHERE username = :username ORDER BY serviceDate DESC');
@@ -139,12 +134,6 @@ class User implements strategy {
       return true;
     }
   }
-
-  public function list() {
-    $this->db->query('SELECT * FROM users ORDER BY createdAt DESC');
-    return $this->db->resultSet();
-  }
-
 
   public function isAdmin($username) {
     $this->db->query('SELECT * FROM users WHERE username = :username');

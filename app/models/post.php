@@ -2,20 +2,30 @@
 
 namespace MVCPHP\models;
 // add delete edit list  
-class post implements strategy {
+class post implements Strategy {
   private $db;
+  private $context;
 
   public function __construct() {
     global $registry;
     $this->db = $registry->get('db');
+    $this->context = new Context(new PostAdd());
   }
 
   public function add($data) {
-    $this->db->query('INSERT INTO posts(username, postTitle, postContent, photoName) VALUES(:username, :title, :content, :photo)');
-    $this->db->bind(':username', $data['username']);
+    return $this->context->executeStrategy($data);
+  }
+
+  public function edit($data) {
+    if (empty($data['photo'])) {
+      $this->db->query('UPDATE posts SET postTitle = :title, postContent = :content WHERE postId = :id');
+    } else {
+      $this->db->query('UPDATE posts SET postTitle = :title, postContent = :content, photoName = :name WHERE postId = :id');
+      $this->db->bind(':name', $data['photo']);
+    }
     $this->db->bind(':title', $data['title']);
     $this->db->bind(':content', nl2br($data['content']));
-    $this->db->bind(':photo', $data['photo']);
+    $this->db->bind(':id', $data['id']);
     if ($this->db->execute()) {
       return true;
     } else {
@@ -67,21 +77,6 @@ class post implements strategy {
     return $this->db->single();
   }
 
-  public function edit($data) {
-    if (empty($data['photo'])) {
-      $this->db->query('UPDATE posts SET postTitle = :title, postContent = :content WHERE postId = :id');
-    } else {
-      $this->db->query('UPDATE posts SET postTitle = :title, postContent = :content, photoName = :name WHERE postId = :id');
-      $this->db->bind(':name', $data['photo']);
-    }
-    $this->db->bind(':title', $data['title']);
-    $this->db->bind(':content', nl2br($data['content']));
-    $this->db->bind(':id', $data['id']);
-    if ($this->db->execute()) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  
 
 }

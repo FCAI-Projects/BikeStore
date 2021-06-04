@@ -4,10 +4,6 @@
 namespace MVCPHP\models;
 
 
-interface strategy {
+interface Strategy {
   public function add($data);
-
-  public function edit($data);
-
-  public function list();
 }
